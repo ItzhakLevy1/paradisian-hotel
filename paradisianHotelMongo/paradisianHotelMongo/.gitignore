@@ -1,0 +1,48 @@
+### General ###
+HELP.md
+
+### Maven ###
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### IDE-Specific ###
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+
+### Spring Tool Suite ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans/
+.sts4-cache/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Build Artifacts ###
+build/
+
+### Exclude sensitive files ###
+# AWS credentials and other sensitive files
+src/main/resources/application.properties
+src/main/resources/application-dev.properties
+src/main/resources/application-prod.properties
+
+# Exclude logs and temporary files
+*.log
+*.tmp
+*.swp
+*.swo
+.DS_Store
