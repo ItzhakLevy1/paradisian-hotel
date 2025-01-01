@@ -22,10 +22,8 @@ const HomePage = () => {
           />
           <div className="overlay"></div>
           <div className="animated-texts overlay-content">
-            <h1>
-              Welcome to{" "}
-              <span className="paradisian-color">Paradisian Hotel</span>
-            </h1>
+            <h1>Welcome to</h1>
+            <h1 className="paradisian-color">Paradisian Hotel</h1>
             <br />
             <h3>Step into a heaven of comfort and care</h3>
           </div>

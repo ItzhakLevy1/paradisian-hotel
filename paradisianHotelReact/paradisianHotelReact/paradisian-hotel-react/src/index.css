@@ -24,7 +24,6 @@
   justify-content: space-between;
   align-items: center;
   padding: 25px 70px 25px 75px;
-  background-color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
   font-size: 20px;
@@ -186,7 +185,6 @@ button[type="submit"]:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .overlay-content {
@@ -196,6 +194,10 @@ button[type="submit"]:hover {
   transform: translate(-50%, -50%);
   color: #fff;
   justify-content: flex-start;
+  backdrop-filter: blur(15px);
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 1em;
 }
 
 /* The header banner */
@@ -204,7 +206,7 @@ button[type="submit"]:hover {
   background-size: cover;
   background-position: center;
   position: relative;
-  height: 80vh;
+  height: 100vh;
 }
 
 .header-banner {
