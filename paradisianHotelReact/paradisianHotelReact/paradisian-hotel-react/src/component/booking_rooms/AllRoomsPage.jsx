@@ -13,11 +13,13 @@ const AllRoomsPage = () => {
   const [selectedRoomType, setSelectedRoomType] = useState(""); // Tracks the currently selected room type for filtering
   const [currentPage, setCurrentPage] = useState(1); // Tracks the current page for pagination
   const [roomsPerPage] = useState(5); // Number of rooms to display per page (fixed at 5)
+  const [sortOrder, setSortOrder] = useState("asc"); // Tracks the sorting order (ascending or descending)
 
   // Function to handle search results passed from the RoomSearch component
   const handleSearchResult = (results) => {
-    setRooms(results); // Update the full rooms list with search results
-    setFilteredRooms(results); // Update the filtered list with search results
+    const sortedResults = sortRoomsByPrice(results, sortOrder); // Sort the search results by price
+    setRooms(sortedResults); // Update the full rooms list with search results
+    setFilteredRooms(sortedResults); // Update the filtered list with search results
   };
 
   // useEffect runs once when the component mounts to fetch data
@@ -27,8 +29,9 @@ const AllRoomsPage = () => {
       try {
         const response = await ApiService.getAllRooms(); // Call the API service to fetch all rooms
         const allRooms = response.roomList; // Extract the room list from the response
-        setRooms(allRooms); // Update state with all rooms
-        setFilteredRooms(allRooms); // Initially, filtered rooms are the same as all rooms
+        const sortedRooms = sortRoomsByPrice(allRooms, sortOrder); // Sort the rooms by price
+        setRooms(sortedRooms); // Update state with all rooms
+        setFilteredRooms(sortedRooms); // Initially, filtered rooms are the same as all rooms
       } catch (error) {
         console.error("Error fetching rooms:", error.message); // Log any errors
       }
@@ -46,7 +49,18 @@ const AllRoomsPage = () => {
 
     fetchRooms(); // Fetch rooms on component mount
     fetchRoomTypes(); // Fetch room types on component mount
-  }, []); // Empty dependency array ensures this runs only once when the component mounts
+  }, [sortOrder]); // Re-run effect when sortOrder changes
+
+  // Function to sort rooms by price
+  const sortRoomsByPrice = (rooms, order) => {
+    return rooms.sort((a, b) => {
+      if (order === "asc") {
+        return a.roomPrice - b.roomPrice;
+      } else {
+        return b.roomPrice - a.roomPrice;
+      }
+    });
+  };
 
   // Event handler for room type selection
   const handleRoomTypeChange = (e) => {
@@ -56,12 +70,12 @@ const AllRoomsPage = () => {
 
   // Filter rooms by type
   const filterRooms = (type) => {
-    if (type === "") {
-      setFilteredRooms(rooms); // If no type is selected, reset to show all rooms
-    } else {
-      const filtered = rooms.filter((room) => room.roomType === type); // Filter rooms matching the selected type
-      setFilteredRooms(filtered); // Update state with the filtered rooms
+    let filtered = rooms;
+    if (type !== "") {
+      filtered = rooms.filter((room) => room.roomType === type); // Filter rooms matching the selected type
     }
+    const sortedFilteredRooms = sortRoomsByPrice(filtered, sortOrder); // Sort the filtered rooms by price
+    setFilteredRooms(sortedFilteredRooms); // Update state with the filtered rooms
     setCurrentPage(1); // Reset to the first page after filtering
   };
 
