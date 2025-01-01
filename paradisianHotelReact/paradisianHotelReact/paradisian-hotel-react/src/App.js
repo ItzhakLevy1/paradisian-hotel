@@ -10,6 +10,8 @@ import RoomDetailsPage from "./component/booking_rooms/RoomDetailsPage";
 import LoginPage from "./component/auth/LoginPage";
 import RegisterPage from "./component/auth/RegisterPage";
 import ProfilePage from "./component/profile/ProfilePage";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 function App() {
   return (
