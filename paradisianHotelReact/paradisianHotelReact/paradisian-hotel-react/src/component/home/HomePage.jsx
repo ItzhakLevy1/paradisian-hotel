@@ -20,6 +20,7 @@ const HomePage = () => {
             <h1>Welcome to</h1>
             <h1 className="paradisian-color">Paradisian Hotel</h1>
             <br />
+            <hr></hr>
             <h3>Step into a heaven of comfort and care</h3>
           </div>
         </header>
