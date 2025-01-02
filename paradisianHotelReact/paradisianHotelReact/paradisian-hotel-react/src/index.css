@@ -155,16 +155,16 @@ button[type="submit"]:hover {
 /**NAV BAR STYLING END HERE*/
 
 /* FOOTER STYLING */
+
+footer {
+  overflow: hidden;
+}
+
 .my-footer {
   color: #f0e8e8;
   background-color: #444;
   padding: 20px;
-  text-align: center;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  font-weight: 500;
+ overflow: hidden;
 }
 
 
@@ -173,7 +173,11 @@ button[type="submit"]:hover {
 /*HOME PAGE STYLING STARTS HERE*/
 
 .home {
-  margin-bottom: 100px;
+  margin-bottom: 60px;
+  background-image: url("../public/assets/front.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 /* HEADER */
@@ -365,6 +369,7 @@ button[type="submit"]:hover {
   color: #007F86;
   text-align: center;
   margin: 5px auto 30px auto;
+  overflow: hidden;
 }
 
 .paradisian-color {
@@ -403,6 +408,7 @@ button[type="submit"]:hover {
   margin-bottom: 5px;
   font-weight: 900;
   color: #007F86;
+  overflow: hidden;
 }
 
 .service-description {

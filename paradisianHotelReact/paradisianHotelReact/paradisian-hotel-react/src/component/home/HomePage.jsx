@@ -15,11 +15,6 @@ const HomePage = () => {
       {/* HEADER / BANNER ROOM SECTION */}
       <section>
         <header className="header-banner">
-          <img
-            src="assets/hotel.jpg"
-            alt="Paradisian Hotel"
-            className="header-image"
-          />
           <div className="overlay"></div>
           <div className="animated-texts overlay-content">
             <h1>Welcome to</h1>
