@@ -12,6 +12,7 @@ const HomePage = () => {
 
   return (
     <div className="home">
+      <img src="./assets/front.jpg" alt="Front Image" className="home-image" />
       {/* HEADER / BANNER ROOM SECTION */}
       <section>
         <header className="header-banner">
@@ -21,7 +22,9 @@ const HomePage = () => {
             <h1 className="paradisian-color">Paradisian Hotel</h1>
             <br />
             <hr></hr>
-            <h3>Step into a heaven <br></br>of comfort and care</h3>
+            <h3>
+              Step into a heaven <br></br>of comfort and care
+            </h3>
           </div>
         </header>
       </section>
@@ -37,7 +40,7 @@ const HomePage = () => {
       </h4> */}
 
       <h2 className="home-services">
-      <span className="paradisian-color">Services at Paradisian Hotel</span>
+        <span className="paradisian-color">Services at Paradisian Hotel</span>
       </h2>
 
       {/* SERVICES SECTION */}
