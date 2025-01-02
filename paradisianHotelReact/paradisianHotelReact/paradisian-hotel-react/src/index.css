@@ -222,29 +222,24 @@ footer {
 }
 
 .search-field {
-  flex: 0 0 calc(25% - 10px);
+  flex-basis: calc(25% - 10px);
   margin: 10px;
   padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgb(0 0 0 / 45%);
 }
 
 .search-field label {
   display: block;
-  margin-bottom: 8px;
-  font-weight: bold;
-  color: #666;
+  color: #f8f9fa;
 }
 
 .search-field input,
-.search-field select {
+.search-field select {  /* The place holder of the Check in/out Date */
   width: 100%;
   padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 16px;
+  border: 1px solid #ffffff;
+  background-color: #ffffff71;
+  cursor: pointer;
 }
 
 .home-search-button {
@@ -255,8 +250,8 @@ footer {
   transition: background-color 0.3s;
 }
 
-.home-search-button:hover {
-  background-color: rgb(34, 80, 128);
+.home-search-button:hover { /* The Search Rooms button */
+  background-color: #007bff;
 }
 
 /* ROOM SEARCH Component RESULT HOME PAGE STYLING */
@@ -629,10 +624,10 @@ footer {
 .search-container input[type="text"] {
 }
 
-button {
+button {  /* The search rooms button */
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #007f86;
+  background-color: #007bffbf;
   color: #fff;
   border: none;
   border-radius: 4px;
