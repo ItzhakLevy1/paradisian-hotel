@@ -168,6 +168,9 @@ footer {
 .header-banner h3 {
   color: #ff7f50;
   font-size: 30px;
+  font-weight: 900;
+  -webkit-text-stroke: 1px rgb(255, 255, 255);
+  overflow: hidden;
 }
 
 /*ROOM SEARCH STARTS HERE*/
@@ -235,13 +238,16 @@ p {
   height: fit-content;
   cursor: pointer;
   border-radius: 5px;
-  transition: background-color 0.3s;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4); /* Add glare effect */
+
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .home-search-button:hover {
   /* The Search Rooms button */
   background-color: #007bff00;
   border: solid 1px white;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.9); /* Add glare effect */
 }
 
 /* ROOM SEARCH Component RESULT HOME PAGE STYLING */
@@ -323,6 +329,8 @@ p {
 
 .paradisian-color {
   color: #ff7f50;
+  font-size: 30px;
+  -webkit-text-stroke: 1px rgb(255, 255, 255);
 }
 
 .service-section {
@@ -330,6 +338,7 @@ p {
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 5em;
+  backdrop-filter: blur(15px);
 }
 
 .service-card {
@@ -343,8 +352,8 @@ p {
 }
 
 .service-card img {
-  width: 50px;
-  /* Adjust size of icon */
+  width: 100px;
+  /* Adjust size of the service icon */
   margin-right: 10px;
 }
 
@@ -361,7 +370,7 @@ p {
 }
 
 .service-description {
-  color: #444;
+  color: #000000;
 }
 
 /*HOME PAGE STYLING ENDS HERE*/

@@ -21,7 +21,7 @@ const HomePage = () => {
             <h1 className="paradisian-color">Paradisian Hotel</h1>
             <br />
             <hr></hr>
-            <h3>Step into a heaven of comfort and care</h3>
+            <h3>Step into a heaven <br></br>of comfort and care</h3>
           </div>
         </header>
       </section>
@@ -30,14 +30,14 @@ const HomePage = () => {
       <RoomSearch handleSearchResult={handleSearchResult} />
       <RoomResult roomSearchResults={roomSearchResults} />
 
-      <h4>
+      {/* <h4>
         <a className="view-rooms-home" href="/rooms">
           All Rooms
         </a>
-      </h4>
+      </h4> */}
 
       <h2 className="home-services">
-        Services at <span className="paradisian-color">Paradisian Hotel</span>
+      <span className="paradisian-color">Services at Paradisian Hotel</span>
       </h2>
 
       {/* SERVICES SECTION */}
