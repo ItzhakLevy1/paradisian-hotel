@@ -12,22 +12,22 @@ const HomePage = () => {
 
   return (
     <div className="home">
-      <img src="./assets/front.jpg" alt="Front Image" className="home-image" />
-      {/* HEADER / BANNER ROOM SECTION */}
-      <section>
-        <header className="header-banner">
-          <div className="overlay"></div>
-          <div className="animated-texts overlay-content">
-            <h1>Welcome to</h1>
-            <h1 className="paradisian-color">Paradisian Hotel</h1>
-            <br />
-            <hr></hr>
-            <h3>
-              Step into a heaven <br></br>of comfort and care
-            </h3>
-          </div>
-        </header>
-      </section>
+    <img src="./assets/front.jpg" alt="Front Image" className="home-image" />
+    {/* HEADER / BANNER ROOM SECTION */}
+    <section>
+      <header className="header-banner">
+        <div className="overlay"></div>
+        <div className="animated-texts overlay-content">
+          <h1>Welcome to</h1>
+          <h1 className="paradisian-color">Paradisian Hotel</h1>
+          <br />
+          <hr></hr>
+          <h3>
+            Step into a heaven <br></br>of comfort and care
+          </h3>
+        </div>
+      </header>
+    </section>
 
       {/* SEARCH/FIND AVAILABLE ROOM SECTION */}
       <RoomSearch handleSearchResult={handleSearchResult} />
