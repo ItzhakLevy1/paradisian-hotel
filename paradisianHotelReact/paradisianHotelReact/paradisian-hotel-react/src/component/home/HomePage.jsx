@@ -12,22 +12,22 @@ const HomePage = () => {
 
   return (
     <div className="home">
-    <img src="./assets/front.jpg" alt="Front Image" className="home-image" />
-    {/* HEADER / BANNER ROOM SECTION */}
-    <section>
-      <header className="header-banner">
-        <div className="overlay"></div>
-        <div className="animated-texts overlay-content">
-          <h1>Welcome to</h1>
-          <h1 className="paradisian-color">Paradisian Hotel</h1>
-          <br />
-          <hr></hr>
-          <h3>
-            Step into a heaven <br></br>of comfort and care
-          </h3>
-        </div>
-      </header>
-    </section>
+      <img src="./assets/front.jpg" alt="Front Image" className="home-image" />
+      {/* HEADER / BANNER ROOM SECTION */}
+      <section>
+        <header className="header-banner">
+          <div className="overlay"></div>
+          <div className="animated-texts overlay-content">
+            <h1>Welcome to</h1>
+            <h1>Paradisian Hotel</h1>
+            <br />
+            <hr></hr>
+            <h3>
+              Step into a heaven <br></br>of comfort and care
+            </h3>
+          </div>
+        </header>
+      </section>
 
       {/* SEARCH/FIND AVAILABLE ROOM SECTION */}
       <RoomSearch handleSearchResult={handleSearchResult} />
@@ -39,11 +39,10 @@ const HomePage = () => {
         </a>
       </h4> */}
 
+      {/* SERVICES SECTION */}
       <h2 className="home-services">
         <span className="paradisian-color">Services at Paradisian Hotel</span>
       </h2>
-
-      {/* SERVICES SECTION */}
       <section className="service-section">
         <div className="service-card">
           {/* <img src="./assets/images/ac.png" alt="Air Conditioning" /> */}
