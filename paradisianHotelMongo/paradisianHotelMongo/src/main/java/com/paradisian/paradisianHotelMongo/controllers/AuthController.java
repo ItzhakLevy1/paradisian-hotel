@@ -5,6 +5,7 @@ import com.paradisian.paradisianHotelMongo.dto.Response;
 import com.paradisian.paradisianHotelMongo.entity.User;
 import com.paradisian.paradisianHotelMongo.service.interfac.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,11 +28,21 @@ public class AuthController {
 
 
 
-    @PostMapping ("/register")  // This annotation indicates that this method will handle POST requests sent to /auth/register
-    public ResponseEntity<Response> register(@RequestBody User user) {           // The User object is populated with data from the request body (typically JSON). Spring automatically converts the JSON into a User object.
-        Response response = userService.register(user);                          // This method is expected to handle the registration logic
-        return ResponseEntity.status(response.getStatusCode()).body(response);   // Ensures that the API response includes both the status and the message.
+    @PostMapping("/register")
+    public ResponseEntity<Response> register(@RequestBody User user) {
+        // Check if email is already taken
+        if (userService.isEmailTaken(user.getEmail())) {
+            // Return a 400 Bad Request response with an error message
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(new Response("Email is already taken", HttpStatus.BAD_REQUEST.value()));
+        }
+
+        // If email is not taken, proceed with registration
+        Response response = userService.register(user);
+        return ResponseEntity.status(response.getStatusCode()).body(response);
     }
+
 
 
 

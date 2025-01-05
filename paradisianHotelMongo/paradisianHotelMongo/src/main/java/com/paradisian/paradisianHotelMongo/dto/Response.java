@@ -21,4 +21,10 @@ public class Response {
     private List<UserDTO> userList;
     private List<RoomDTO> roomList;
     private List<BookingDTO> bookingList;
+
+    // Constructor that accepts message and statusCode
+    public Response(String message, int statusCode) {
+        this.message = message;
+        this.statusCode = statusCode;
+    }
 }

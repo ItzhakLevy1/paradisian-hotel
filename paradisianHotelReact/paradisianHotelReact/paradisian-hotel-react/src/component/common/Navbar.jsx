@@ -7,6 +7,7 @@ const Navbar = () => {
   const isAdmin = ApiService.isAdmin();
   const isUser = ApiService.isUser();
   const navigate = useNavigate();
+
   const handleLogout = () => {
     const isLogout = window.confirm(
       "Are you sure you want to logout this user?"
@@ -36,52 +37,82 @@ const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
-            <li className="nav-item hover-">
-              <NavLink to="/home" className="nav-link active">
+            <li className="nav-item">
+              <NavLink 
+                to="/home" 
+                className="nav-link" 
+                style={({ isActive }) => ({ color: isActive ? 'white' : 'inherit' })}
+              >
                 Home
               </NavLink>
             </li>
-            <li>
-              <NavLink to="/rooms" className="nav-link active">
+            <li className="nav-item">
+              <NavLink 
+                to="/rooms" 
+                className="nav-link" 
+                style={({ isActive }) => ({ color: isActive ? 'white' : 'inherit' })}
+              >
                 Rooms
               </NavLink>
             </li>
-            <li>
-              <NavLink to="/find-booking" className="nav-link active">
+            <li className="nav-item">
+              <NavLink 
+                to="/find-booking" 
+                className="nav-link" 
+                style={({ isActive }) => ({ color: isActive ? 'white' : 'inherit' })}
+              >
                 Find my Booking
               </NavLink>
             </li>
-
             {isUser && (
-              <li>
-                <NavLink to="/profile" className="nav-link active">
+              <li className="nav-item">
+                <NavLink 
+                  to="/profile" 
+                  className="nav-link" 
+                  style={({ isActive }) => ({ color: isActive ? 'white' : 'inherit' })}
+                >
                   Profile
                 </NavLink>
               </li>
             )}
             {isAdmin && (
-              <li>
-                <NavLink to="/admin" className="nav-link active">
+              <li className="nav-item">
+                <NavLink 
+                  to="/admin" 
+                  className="nav-link" 
+                  style={({ isActive }) => ({ color: isActive ? 'white' : 'inherit' })}
+                >
                   Admin
                 </NavLink>
               </li>
             )}
-
             {!isAuthenticated && (
-              <li>
-                <NavLink to="/login" className="nav-link active">
+              <li className="nav-item">
+                <NavLink 
+                  to="/login" 
+                  className="nav-link" 
+                  style={({ isActive }) => ({ color: isActive ? 'white' : 'inherit' })}
+                >
                   Login
                 </NavLink>
               </li>
             )}
             {!isAuthenticated && (
-              <li>
-                <NavLink to="/register" className="nav-link active">
+              <li className="nav-item">
+                <NavLink 
+                  to="/register" 
+                  className="nav-link" 
+                  style={({ isActive }) => ({ color: isActive ? 'white' : 'inherit' })}
+                >
                   Register
                 </NavLink>
               </li>
             )}
-            {isAuthenticated && <li onClick={handleLogout}>Logout</li>}
+            {isAuthenticated && (
+              <li className="nav-item" onClick={handleLogout}>
+                <span className="nav-link active" id="logout">Logout</span>
+              </li>
+            )}
           </ul>
         </div>
       </div>

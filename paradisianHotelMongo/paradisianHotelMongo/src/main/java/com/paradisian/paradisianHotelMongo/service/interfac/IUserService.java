@@ -7,6 +7,8 @@ import com.paradisian.paradisianHotelMongo.entity.User;
 
 public interface IUserService {
 
+    boolean isEmailTaken(String email);
+
     Response register(User user);
 
     Response login(LoginRequest loginRequest);
