@@ -46,7 +46,6 @@ public class UserService implements IUserService {
 
     @Override
     public Response register(User user) {
-
         Response response = new Response("Email is already taken", HttpStatus.BAD_REQUEST.value());
 
         try {
@@ -56,12 +55,24 @@ public class UserService implements IUserService {
             }
 
             // Check if email is already taken
-            if (isEmailTaken(user.getEmail())) { // Corrected to check the email
+            if (isEmailTaken(user.getEmail())) {
                 throw new OurException("Email Already Exists");
+            }
+
+            // Check if phone number is already taken
+            if (userRepository.existsByPhoneNumber(user.getPhoneNumber())) {
+                throw new OurException("Phone number is already taken");
+            }
+
+            // Validate phone number format (optional, depending on your requirements)
+            if (!Utils.isValidPhoneNumber(user.getPhoneNumber())) {
+                throw new OurException("Invalid phone number format");
             }
 
             // Encrypt the user's password before saving
             user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+            // Save the user to the repository
             User savedUser = userRepository.save(user);
 
             // Map the saved user to a DTO
@@ -83,6 +94,7 @@ public class UserService implements IUserService {
 
         return response;
     }
+
 
     @Override
     public Response login(LoginRequest loginRequest) {

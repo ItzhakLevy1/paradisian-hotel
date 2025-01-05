@@ -6,6 +6,8 @@ import com.paradisian.paradisianHotelMongo.entity.*;
 
 import java.security.SecureRandom;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Utils {
@@ -137,6 +139,22 @@ public class Utils {
     // Converts a list of Booking entities into a list of BookingDTOs using the mapBookingEntityToBookingDTO method
     public static List<BookingDTO> mapBookingListEntityToBookingListDTO(List<Booking> bookingList) {
         return bookingList.stream().map(Utils::mapBookingEntityToBookingDTO).collect(Collectors.toList());
+    }
+
+    /**
+     * Validates the format of a phone number.
+     * You can adjust the regex according to the specific format you require.
+     *
+     * @param phoneNumber the phone number to validate.
+     * @return true if the phone number is valid, false otherwise.
+     */
+    public static boolean isValidPhoneNumber(String phoneNumber) {
+        // Example regex for a valid phone number (change as needed)
+        String regex = "^[+]?\\d{1,4}?[-.\\s]?\\(?\\d{1,4}?\\)?[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,4}$";
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(phoneNumber);
+        return matcher.matches();
     }
 
 }

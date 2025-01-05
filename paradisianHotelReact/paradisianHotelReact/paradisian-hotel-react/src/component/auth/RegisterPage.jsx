@@ -23,13 +23,26 @@ function RegisterPage() {
         setFormData({ ...formData, [name]: value }); // Update the corresponding field in the formData state
     };
 
-    // Validates the form to ensure all fields are filled
+    // Validates the phone number format
+    const isValidPhoneNumber = (phoneNumber) => {
+        // Example regex for a valid phone number
+        const regex = /^[+]?(\d{1,4}[-.\s]?)?(\(?\d{1,4}\)?[-.\s]?)?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,4}$/;
+        return regex.test(phoneNumber);
+    };
+
+    // Validates the form to ensure all fields are filled and phone number is valid
     const validateForm = () => {
         const { name, email, password, phoneNumber } = formData;
         if (!name || !email || !password || !phoneNumber) {
             return false; // Return false if any field is empty
         }
-        return true; // Return true if all fields are filled
+
+        if (!isValidPhoneNumber(phoneNumber)) {
+            setErrorMessage('Please enter a valid phone number.');
+            return false; // Return false if phone number is invalid
+        }
+        
+        return true; // Return true if all fields are valid
     };
 
     // Handles form submission for user registration
@@ -38,7 +51,6 @@ function RegisterPage() {
         
         // Validate the form
         if (!validateForm()) {
-            setErrorMessage('Please fill all the fields.'); // Show error if validation fails
             setTimeout(() => setErrorMessage(''), 5000); // Clear error after 5 seconds
             return;
         }
