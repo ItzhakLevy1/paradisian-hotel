@@ -27,4 +27,8 @@ public class Response {
         this.message = message;
         this.statusCode = statusCode;
     }
+
+    public Response() {
+
+    }
 }

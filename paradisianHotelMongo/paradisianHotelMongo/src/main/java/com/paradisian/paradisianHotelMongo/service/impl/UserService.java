@@ -9,6 +9,7 @@ import com.paradisian.paradisianHotelMongo.repo.UserRepository;
 import com.paradisian.paradisianHotelMongo.utils.JWTUtils;
 import com.paradisian.paradisianHotelMongo.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -46,7 +47,7 @@ public class UserService implements IUserService {
     @Override
     public Response register(User user) {
 
-        Response response = new Response();
+        Response response = new Response("Email is already taken", HttpStatus.BAD_REQUEST.value());
 
         try {
             // Set default role if not provided
@@ -55,7 +56,7 @@ public class UserService implements IUserService {
             }
 
             // Check if email is already taken
-            if (isEmailTaken(user.getId())) {
+            if (isEmailTaken(user.getEmail())) { // Corrected to check the email
                 throw new OurException("Email Already Exists");
             }
 
@@ -86,7 +87,7 @@ public class UserService implements IUserService {
     @Override
     public Response login(LoginRequest loginRequest) {
 
-        Response response = new Response();
+        Response response = new Response("Error while logging in user: ", HttpStatus.INTERNAL_SERVER_ERROR.value());
 
         try {
             // Authenticate the user
@@ -120,7 +121,7 @@ public class UserService implements IUserService {
 
     @Override
     public Response getAllUsers() {
-        Response response = new Response();
+        Response response;
 
         try {
             // Fetch all users and map them to DTOs
@@ -128,21 +129,20 @@ public class UserService implements IUserService {
             List<UserDTO> userDTOList = Utils.mapUserListEntityToUserListDTO(userList);
 
             // Set response
-            response.setStatusCode(200);
-            response.setMessage("successful");
+            response = new Response("successful", HttpStatus.OK.value());
             response.setUserList(userDTOList);
 
         } catch (Exception e) {
-            response.setStatusCode(500);
-            response.setMessage("Error while getting all users: " + e.getMessage());
+            // Handle exception and set error response
+            response = new Response("Error while getting all users: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
         }
         return response;
     }
 
+
     @Override
     public Response getUserBookingHistory(String userId) {
-
-        Response response = new Response();
+        Response response;
 
         try {
             // Fetch user by ID
@@ -152,24 +152,23 @@ public class UserService implements IUserService {
             UserDTO userDTO = Utils.mapUserEntityToUserDTOPlusUserBookingsAndRoom(user);
 
             // Set response
-            response.setStatusCode(200);
-            response.setMessage("successful");
+            response = new Response("successful", HttpStatus.OK.value());
             response.setUser(userDTO);
 
         } catch (OurException e) {
-            response.setStatusCode(404);
-            response.setMessage(e.getMessage());
+            // Handle custom exception and set error response
+            response = new Response(e.getMessage(), HttpStatus.NOT_FOUND.value());
         } catch (Exception e) {
-            response.setStatusCode(500);
-            response.setMessage("Error while getting user booking history: " + e.getMessage());
+            // Handle generic exceptions
+            response = new Response("Error while getting user booking history: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
         }
         return response;
     }
 
+
     @Override
     public Response deleteUser(String userId) {
-
-        Response response = new Response();
+        Response response;
 
         try {
             // Check if user exists
@@ -179,23 +178,22 @@ public class UserService implements IUserService {
             userRepository.deleteById(userId);
 
             // Set response
-            response.setStatusCode(200);
-            response.setMessage("successful");
+            response = new Response("successful", HttpStatus.OK.value());
 
         } catch (OurException e) {
-            response.setStatusCode(404);
-            response.setMessage(e.getMessage());
+            // Handle custom exception and set error response
+            response = new Response(e.getMessage(), HttpStatus.NOT_FOUND.value());
         } catch (Exception e) {
-            response.setStatusCode(500);
-            response.setMessage("Error while deleting a user: " + e.getMessage());
+            // Handle generic exceptions
+            response = new Response("Error while deleting a user: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
         }
         return response;
     }
 
+
     @Override
     public Response getUserById(String userId) {
-
-        Response response = new Response();
+        Response response;
 
         try {
             // Fetch user by ID
@@ -205,24 +203,23 @@ public class UserService implements IUserService {
             UserDTO userDTO = Utils.mapUserEntityToUserDTO(user);
 
             // Set response
-            response.setStatusCode(200);
-            response.setMessage("successful");
+            response = new Response("successful", HttpStatus.OK.value());
             response.setUser(userDTO);
 
         } catch (OurException e) {
-            response.setStatusCode(404);
-            response.setMessage(e.getMessage());
+            // Handle custom exception and set error response
+            response = new Response(e.getMessage(), HttpStatus.NOT_FOUND.value());
         } catch (Exception e) {
-            response.setStatusCode(500);
-            response.setMessage("Error while getting a user by id: " + e.getMessage());
+            // Handle generic exceptions
+            response = new Response("Error while getting a user by id: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
         }
         return response;
     }
 
+
     @Override
     public Response getMyInfo(String email) {
-
-        Response response = new Response();
+        Response response;
 
         try {
             // Fetch user by email
@@ -232,19 +229,19 @@ public class UserService implements IUserService {
             UserDTO userDTO = Utils.mapUserEntityToUserDTO(user);
 
             // Set response
-            response.setStatusCode(200);
-            response.setMessage("successful");
+            response = new Response("successful", HttpStatus.OK.value());
             response.setUser(userDTO);
 
         } catch (OurException e) {
-            response.setStatusCode(404);
-            response.setMessage(e.getMessage());
+            // Handle custom exception and set error response
+            response = new Response(e.getMessage(), HttpStatus.NOT_FOUND.value());
         } catch (Exception e) {
-            response.setStatusCode(500);
-            response.setMessage("Error while getting a user info: " + e.getMessage());
+            // Handle generic exceptions
+            response = new Response("Error while getting user info: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
         }
         return response;
     }
+
 }
 
 /**

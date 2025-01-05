@@ -67,8 +67,12 @@ function RegisterPage() {
                 }, 3000);
             }
         } catch (error) {
-            // Handle errors returned by the server
-            setErrorMessage(error.response?.data?.message || error.message); // Show server or generic error message
+            // Check for specific error like "Email is already taken"
+            if (error.response && error.response.data && error.response.data.message) {
+                setErrorMessage(error.response.data.message); // Show the error message from the backend
+            } else {
+                setErrorMessage(error.message || "An error occurred"); // Show generic error message
+            }
             setTimeout(() => setErrorMessage(''), 5000); // Clear error after 5 seconds
         }
     };
