@@ -26,7 +26,7 @@ function AppContent() {
   const isHomePage = location.pathname === "/home";
 
   return (
-    <div className={`App ${!isHomePage ? "newBackground1" : ""}`}>
+    <div className={`App ${!isHomePage ? "newBackground" : ""}`}>
       <Navbar />
       <div className="content">
         <Routes>
