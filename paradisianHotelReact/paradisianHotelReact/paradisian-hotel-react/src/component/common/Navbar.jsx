@@ -21,9 +21,9 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
+        <span className="hotelName" href="#">
           Paradisian Hotel
-        </a>
+        </span>
         <button
           className="navbar-toggler"
           type="button"

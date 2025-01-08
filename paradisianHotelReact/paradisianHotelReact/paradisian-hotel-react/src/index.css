@@ -16,6 +16,12 @@
 }
 
 /* General Navbar Styling */
+
+.hotelName {
+  color: #007f86;
+  font-weight: bold;
+  -webkit-text-stroke: 1px #000000;
+}
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -690,13 +696,17 @@ p {
 /* ROOM SEARCH RESULT */
 .book-now-button {
   background-color: #007f8600;
-  color: white;
+  color: #666;
   padding: 10px 20px;
   border: 1px solid #007f86;
   border-radius: 5px;
   cursor: pointer;
   margin-right: 10px;
   margin-left: 10px;
+  transition: color 0.3s;
+}
+.book-now-button:hover {
+  color: white;
 }
 
 .edit-room-button {
