@@ -131,7 +131,12 @@ const RoomDetailsPage = () => {
   };
 
   if (isLoading) {
-    return <p className="room-detail-loading">Loading room details...</p>;
+    return (
+      <div className="spinner-container">
+        <div className="large-spinner"></div>
+        {/* <p className="room-detail-loading">Loading room details...</p> */}
+      </div>
+    );
   }
 
   if (error) {

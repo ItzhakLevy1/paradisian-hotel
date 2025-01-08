@@ -442,6 +442,11 @@ p {
 
 .all-room-filter-div {
   margin-left: 5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 2em;
 }
 
 .all-room-filter-div label {
@@ -873,4 +878,46 @@ h2 {
 
 .booking-result-item:hover {
   transform: translateY(-5px);
+}
+
+.large-spinner {
+  width: 10rem;
+  height: 10rem;
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #666;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  height: "100vh";
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.go-back-button {
+  background-color: #666;
+  color: white;
+  padding: 10px 20px;
+  border: 1px solid #666;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.go-back-button:hover {
+  background-color: #66666683;
+  color: #666;
+  border: 1px solid #666;
 }

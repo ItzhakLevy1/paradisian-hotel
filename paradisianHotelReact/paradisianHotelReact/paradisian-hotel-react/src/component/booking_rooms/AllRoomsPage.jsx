@@ -3,6 +3,7 @@ import ApiService from "../../service/ApiService";
 import Pagination from "../common/Pagination";
 import RoomResult from "../common/RoomResult";
 import RoomSearch from "../common/RoomSearch";
+import "../../index.css";
 
 // Component to display all rooms with filtering, searching, and pagination functionalities
 const AllRoomsPage = () => {
@@ -14,6 +15,8 @@ const AllRoomsPage = () => {
   const [currentPage, setCurrentPage] = useState(1); // Tracks the current page for pagination
   const [roomsPerPage] = useState(5); // Number of rooms to display per page (fixed at 5)
   const [sortOrder, setSortOrder] = useState("asc"); // Tracks the sorting order (ascending or descending)
+  const [isLoading, setIsLoading] = useState(true); // State to track loading status
+  const [error, setError] = useState(null);
 
   // Function to handle search results passed from the RoomSearch component
   const handleSearchResult = (results) => {
@@ -34,6 +37,9 @@ const AllRoomsPage = () => {
         setFilteredRooms(sortedRooms); // Initially, filtered rooms are the same as all rooms
       } catch (error) {
         console.error("Error fetching rooms:", error.message); // Log any errors
+        setError(error.response?.data?.message || error.message);
+      } finally {
+        setIsLoading(false); // Set loading to false after fetching data
       }
     };
 
@@ -86,6 +92,18 @@ const AllRoomsPage = () => {
 
   // Function to handle page changes
   const paginate = (pageNumber) => setCurrentPage(pageNumber); // Update the current page state
+
+  if (isLoading) {
+    return (
+      <div className="d-flex justify-content-center align-items-center spinner-container">
+        <div className="large-spinner"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return <p className="text-center text-danger">{error}</p>;
+  }
 
   return (
     <div className="all-rooms">
