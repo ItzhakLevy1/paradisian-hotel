@@ -250,6 +250,7 @@ const RoomDetailsPage = () => {
                 Confirm Booking
               </button>
             </div>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
           </div>
         )}
         {totalPrice > 0 && (

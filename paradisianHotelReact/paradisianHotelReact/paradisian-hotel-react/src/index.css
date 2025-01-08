@@ -585,24 +585,11 @@ p {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.confirm-booking {
-  background-color: #007f86;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.confirm-booking:hover {
-  background-color: rgb(34, 80, 128);
-}
-
 .guest-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 20px;
 }
 
@@ -622,17 +609,19 @@ p {
 }
 
 .confirm-booking {
-  background-color: #007f86;
-  color: white;
+  background-color: #fff;
+  color: #666;
   padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
+  border: solid 1px #fff;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  margin-right: 10px;
+  transition: border 0.3s ease;
 }
 
 .confirm-booking:hover {
-  background-color: rgb(34, 80, 128);
+  color: #666;
+  border: solid 1px #666;
 }
 
 .booking-success-message {
@@ -708,10 +697,11 @@ p {
   cursor: pointer;
   margin-right: 10px;
   margin-left: 10px;
-  transition: color 0.3s;
+  transition: background-color 0.3s ease-in-out;
 }
 .book-now-button:hover {
-  color: white;
+  color: #ffff;
+  background-color: #666;
 }
 
 .edit-room-button {
@@ -920,4 +910,20 @@ h2 {
   background-color: #66666683;
   color: #666;
   border: 1px solid #666;
+}
+
+.accept-booking {
+  background-color: #fff;
+  color: #666;
+  padding: 10px 20px;
+  border: solid 1px #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: border 0.3s ease;
+}
+
+.accept-booking:hover {
+  color: #666;
+  border: solid 1px #666;
 }
