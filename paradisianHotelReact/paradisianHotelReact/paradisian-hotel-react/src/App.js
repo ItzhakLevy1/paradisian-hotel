@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Navbar from "./component/common/Navbar";
 import FooterComponent from "./component/common/Footer";
 import HomePage from "./component/home/HomePage";
@@ -16,24 +16,33 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 function App() {
   return (
     <BrowserRouter>
-      <div className="App">
-        <Navbar />
-        <div className="content">
-          <Routes>
-            <Route exact path="/home" element={<HomePage />} />
-            <Route exact path="/rooms" element={<AllRoomsPage />} />
-            <Route path="/find-booking" element={<FindBookingPage/>}></Route>
-            <Route path="/room-details-book/:roomId" element={<RoomDetailsPage/>}></Route>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
-          </Routes>
-        </div>
-        <FooterComponent />
-      </div>
+      <AppContent />
     </BrowserRouter>
+  );
+}
+
+function AppContent() {
+  const location = useLocation();
+  const isHomePage = location.pathname === "/home";
+
+  return (
+    <div className={`App ${!isHomePage ? "newBackground1" : ""}`}>
+      <Navbar />
+      <div className="content">
+        <Routes>
+          <Route exact path="/home" element={<HomePage />} />
+          <Route exact path="/rooms" element={<AllRoomsPage />} />
+          <Route path="/find-booking" element={<FindBookingPage/>}></Route>
+          <Route path="/room-details-book/:roomId" element={<RoomDetailsPage/>}></Route>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+        </Routes>
+      </div>
+      <FooterComponent />
+    </div>
   );
 }
 
