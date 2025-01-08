@@ -194,7 +194,7 @@ const RoomDetailsPage = () => {
         </button>
         <button
           className="go-back-button"
-          onClick={() => setShowDatePicker(false)}
+          onClick={() => navigate(-1)}
         >
           Go Back
         </button>
