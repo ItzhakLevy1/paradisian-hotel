@@ -934,4 +934,32 @@ h2 {
   color: #ffffff !important; /* White text color */
 }
 
-/* End Custom styling for Toastr toast notifications message */
+.edit-profile-button {
+  margin: 2em;
+  padding: 0.5em 1em;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  transition: border0.3s, box-shadow 0.3s;
+}
+
+.edit-profile-button:hover {
+  border: 1px solid #007f86;
+  color: #007f86;
+  box-shadow: 0 0 10px #007f86;
+}
+
+.logout-button {
+  margin: 2em;
+  padding: 0.5em 1em;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.logout-button:hover {
+  border: 1px solid #666;
+  color: #666;
+  box-shadow: 0 0 10px #666;
+}

@@ -53,7 +53,6 @@ function AppContent() {
           <Route exact path="/rooms" element={<AllRoomsPage />} />
           <Route path="/find-booking" element={<FindBookingPage/>}></Route>
           <Route path="/room-details-book/:roomId" element={<RoomDetailsPage/>}></Route>
-          <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
