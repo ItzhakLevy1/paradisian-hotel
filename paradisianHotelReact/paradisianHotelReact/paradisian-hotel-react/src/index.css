@@ -927,3 +927,11 @@ h2 {
   color: #666;
   border: solid 1px #666;
 }
+
+/* Custom styling for Toastr toast notifications message */
+#toast-container .toast.toast-error {
+  background-color: #000000; /* Red background for error messages */
+  color: #ffffff !important; /* White text color */
+}
+
+/* End Custom styling for Toastr toast notifications message */

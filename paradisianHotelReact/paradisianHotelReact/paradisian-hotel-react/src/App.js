@@ -1,6 +1,12 @@
 import "./App.css";
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
 import Navbar from "./component/common/Navbar";
 import FooterComponent from "./component/common/Footer";
 import HomePage from "./component/home/HomePage";
@@ -12,6 +18,19 @@ import RegisterPage from "./component/auth/RegisterPage";
 import ProfilePage from "./component/profile/ProfilePage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import toastr from "toastr";
+import "toastr/build/toastr.min.css";
+
+// Configure toastr settings
+toastr.options = {
+  positionClass: "toast-top-center",
+  preventDuplicates: true,
+  closeButton: true,
+  progressBar: true,
+  timeOut: "5000",
+  extendedTimeOut: "1000",
+  toastClass: "toast toast-error", // Add custom class for error toasts
+};
 
 function App() {
   return (

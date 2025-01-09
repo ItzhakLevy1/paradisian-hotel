@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ApiService from "../../service/ApiService";
+import toastr from "toastr";
+import "toastr/build/toastr.min.css";
 
 const RoomSearch = ({ handleSearchResult }) => {
   const [startDate, setStartDate] = useState(null);
@@ -18,6 +20,7 @@ const RoomSearch = ({ handleSearchResult }) => {
         setRoomTypes(types);
       } catch (error) {
         console.error("Error fetching room types:", error.message);
+        toastr.error("Error fetching room types: " + error.message);
       }
     };
     fetchRoomTypes();
@@ -34,7 +37,7 @@ const RoomSearch = ({ handleSearchResult }) => {
   /**THis is going to be used to fetch avaailabe rooms from database base on seach data that'll be passed in */
   const handleInternalSearch = async () => {
     if (!startDate || !endDate || !roomType) {
-      showError("Please select all fields");
+      toastr.error("Please select all fields");
       return false;
     }
     try {
@@ -55,8 +58,8 @@ const RoomSearch = ({ handleSearchResult }) => {
       // Check if the response is successful
       if (response.statusCode === 200) {
         if (response.roomList.length === 0) {
-          showError(
-            "Room not currently available for this date range on the selected rom type."
+          toastr.error(
+            "Room not currently available for this date range on the selected room type."
           );
           return;
         }
@@ -64,7 +67,7 @@ const RoomSearch = ({ handleSearchResult }) => {
         setError("");
       }
     } catch (error) {
-      showError("Unown error occured: " + error.response.data.message);
+      toastr.error("Unknown error occurred: " + error.response.data.message);
     }
   };
 

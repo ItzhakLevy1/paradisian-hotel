@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ApiService from "../../service/ApiService"; // Assuming your service is in a file called ApiService.js
 import DatePicker from "react-datepicker";
+import toastr from "toastr";
+import "toastr/build/toastr.min.css";
 // import 'react-datepicker/dist/react-datepicker.css';
 
 const RoomDetailsPage = () => {
@@ -43,8 +45,9 @@ const RoomDetailsPage = () => {
   const handleConfirmBooking = async () => {
     // Check if check-in and check-out dates are selected
     if (!checkInDate || !checkOutDate) {
-      setErrorMessage("Please select check-in and check-out dates.");
-      setTimeout(() => setErrorMessage(""), 5000); // Clear error message after 5 seconds
+      // setErrorMessage("Please select check-in and check-out dates.");
+      // setTimeout(() => setErrorMessage(""), 5000); // Clear error message after 5 seconds
+      toastr.error("Please select check-in and check-out dates");
       return;
     }
 
