@@ -16,6 +16,7 @@ const RoomResult = ({ roomSearchResults }) => { // Collecting the props value = 
                 className="room-list-item-image"
                 src={room.roomPhotoUrl}
                 alt={room.roomType}
+                loading="lazy"
               />
               <div className="room-details">  {/* Display room details */}
                 <h3>{room.roomType}</h3>

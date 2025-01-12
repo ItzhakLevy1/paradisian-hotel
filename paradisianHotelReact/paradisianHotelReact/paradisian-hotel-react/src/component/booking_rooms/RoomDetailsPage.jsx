@@ -169,7 +169,7 @@ const RoomDetailsPage = () => {
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <h2>Room Details</h2>
       <br />
-      <img src={roomPhotoUrl} alt={roomType} className="room-details-image" />
+      <img src={roomPhotoUrl} alt={roomType} className="room-details-image" loading="lazy"/>
       <div className="room-details-info">
         <h3>{roomType}</h3>
         <p>Price: ${roomPrice} / night</p>

@@ -12,7 +12,7 @@ const HomePage = () => {
 
   return (
     <div className="home">
-      <img src="./assets/front.jpg" alt="Front Image" className="home-image" />
+      <img src="./assets/front.jpg" alt="Front Image" className="home-image" loading="lazy"/>
       {/* HEADER / BANNER ROOM SECTION */}
       <section>
         <header className="header-banner">
@@ -46,7 +46,7 @@ const HomePage = () => {
       <section className="service-section">
         <div className="service-card">
           {/* <img src="./assets/images/ac.png" alt="Air Conditioning" /> */}
-          <img src="./assets/ac.png" alt="Air Conditioning" />
+          <img src="./assets/ac.png" alt="Air Conditioning" loading="lazy"/>
           <div className="service-details">
             <h3 className="service-title">Air Conditioning</h3>
             <p className="service-description">
@@ -56,7 +56,7 @@ const HomePage = () => {
           </div>
         </div>
         <div className="service-card">
-          <img src="./assets/mini-bar.png" alt="Mini Bar" />
+          <img src="./assets/mini-bar.png" alt="Mini Bar" loading="lazy"/>
           <div className="service-details">
             <h3 className="service-title">Mini Bar</h3>
             <p className="service-description">
@@ -66,7 +66,7 @@ const HomePage = () => {
           </div>
         </div>
         <div className="service-card">
-          <img src="./assets/parking.png" alt="Parking" />
+          <img src="./assets/parking.png" alt="Parking" loading="lazy"/>
           <div className="service-details">
             <h3 className="service-title">Parking</h3>
             <p className="service-description">
@@ -76,7 +76,7 @@ const HomePage = () => {
           </div>
         </div>
         <div className="service-card">
-          <img src="./assets/wifi.png" alt="WiFi" />
+          <img src="./assets/wifi.png" alt="WiFi" loading="lazy"/>
           <div className="service-details">
             <h3 className="service-title">WiFi</h3>
             <p className="service-description">

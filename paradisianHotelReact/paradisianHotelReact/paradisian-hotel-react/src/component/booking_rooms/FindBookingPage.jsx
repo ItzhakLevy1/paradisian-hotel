@@ -85,6 +85,7 @@ const FindBookingPage = () => {
               alt="" // Alt text in case the image fails to load
               sizes="" // Optional sizes attribute (can be removed if unused)
               srcSet="" // Optional srcSet attribute (can be removed if unused)
+              loading="lazy" // Lazy load the image for better performance
             />
           </div>
         </div>

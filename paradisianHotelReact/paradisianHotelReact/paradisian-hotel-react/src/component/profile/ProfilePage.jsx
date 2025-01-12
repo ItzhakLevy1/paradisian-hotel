@@ -88,7 +88,7 @@ const ProfilePage = () => {
                                 <p><strong>Total Guests:</strong> {booking.totalNumOfGuest}</p>
                                 <p><strong>Room Type:</strong> {booking.room.roomType}</p>
                                 {/* Display the room photo */}
-                                <img src={booking.room.roomPhotoUrl} alt="Room" className="room-photo" />
+                                <img src={booking.room.roomPhotoUrl} alt="Room" className="room-photo" loading="lazy"/>
                             </div>
                         ))
                     ) : (
