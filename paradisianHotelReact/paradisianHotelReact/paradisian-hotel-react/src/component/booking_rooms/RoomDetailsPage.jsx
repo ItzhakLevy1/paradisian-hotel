@@ -45,8 +45,6 @@ const RoomDetailsPage = () => {
   const handleConfirmBooking = async () => {
     // Check if check-in and check-out dates are selected
     if (!checkInDate || !checkOutDate) {
-      // setErrorMessage("Please select check-in and check-out dates.");
-      // setTimeout(() => setErrorMessage(""), 5000); // Clear error message after 5 seconds
       toastr.error("Please select check-in and check-out dates");
       return;
     }
@@ -189,18 +187,17 @@ const RoomDetailsPage = () => {
         </div>
       )}
       <div className="booking-info">
-        <button
-          className="book-now-button"
-          onClick={() => setShowDatePicker(true)}
-        >
-          Book Now
-        </button>
-        <button
-          className="go-back-button"
-          onClick={() => navigate(-1)}
-        >
-          Go Back
-        </button>
+        <div className="button-row">
+          <button
+            className="book-now-button"
+            onClick={() => setShowDatePicker(true)}
+          >
+            Book Now
+          </button>
+          <button className="go-back-button" onClick={() => navigate(-1)}>
+            Go Back
+          </button>
+        </div>
         {showDatePicker && (
           <div className="date-picker-container">
             <DatePicker
@@ -228,7 +225,7 @@ const RoomDetailsPage = () => {
             />
 
             <div className="guest-container">
-              <div className="guest-div">
+              {/* <div className="guest-div centered"> */}
                 <label>Adults:</label>
                 <input
                   type="number"
@@ -236,8 +233,8 @@ const RoomDetailsPage = () => {
                   value={numAdults}
                   onChange={(e) => setNumAdults(parseInt(e.target.value))}
                 />
-              </div>
-              <div className="guest-div">
+              {/* </div> */}
+              <div className="guest-div centered">
                 <label>Children:</label>
                 <input
                   type="number"
@@ -246,12 +243,11 @@ const RoomDetailsPage = () => {
                   onChange={(e) => setNumChildren(parseInt(e.target.value))}
                 />
               </div>
-              <button
-                className="confirm-booking"
-                onClick={handleConfirmBooking}
-              >
-                Confirm Booking
-              </button>
+              {/* <div className="confirm-button-container"> */}
+                <button className="confirm-booking" onClick={handleConfirmBooking}>
+                  Confirm Booking
+                </button>
+              {/* </div> */}
             </div>
             {errorMessage && <p className="error-message">{errorMessage}</p>}
           </div>
