@@ -134,6 +134,7 @@ const RoomDetailsPage = () => {
       setTimeout(() => setErrorMessage(""), 5000); // Clear error message after 5 seconds
     } finally {
       setLoading(false); // Set loading state to false after the request is complete
+      window.scrollTo(0, 0); // Scroll to the top of the page
     }
   };
 
