@@ -24,6 +24,7 @@ const RoomDetailsPage = () => {
   const [showMessage, setShowMessage] = useState(false); // State variable to control message visibility
   const [confirmationCode, setConfirmationCode] = useState(""); // State variable for booking confirmation code
   const [errorMessage, setErrorMessage] = useState(""); // State variable for error message
+  const [loading, setLoading] = useState(false); // State variable to track loading state
 
   useEffect(() => {
     const fetchData = async () => {
@@ -79,6 +80,8 @@ const RoomDetailsPage = () => {
   };
 
   const acceptBooking = async () => {
+    setLoading(true); // Set loading state to true before making the request
+
     try {
       // Ensure checkInDate and checkOutDate are Date objects
       const startDate = new Date(checkInDate);
@@ -119,6 +122,7 @@ const RoomDetailsPage = () => {
       if (response.statusCode === 200) {
         setConfirmationCode(response.bookingConfirmationCode); // Set booking confirmation code
         setShowMessage(true); // Show message
+        setErrorMessage(""); // Clear any previous error message
         // Hide message and navigate to homepage after 5 seconds
         setTimeout(() => {
           setShowMessage(false);
@@ -128,6 +132,8 @@ const RoomDetailsPage = () => {
     } catch (error) {
       setErrorMessage(error.response?.data?.message || error.message);
       setTimeout(() => setErrorMessage(""), 5000); // Clear error message after 5 seconds
+    } finally {
+      setLoading(false); // Set loading state to false after the request is complete
     }
   };
 
@@ -257,7 +263,13 @@ const RoomDetailsPage = () => {
             <p>Total Price: ${totalPrice}</p>
             <p>Total Guests: {totalGuests}</p>
             <button onClick={acceptBooking} className="accept-booking">
-              Accept Booking
+              {loading ? (
+                // <div className="spinner-container">
+                <div className="large-spinner"></div>
+              ) : (
+                // </div>
+                "Accept Booking"
+              )}
             </button>
           </div>
         )}

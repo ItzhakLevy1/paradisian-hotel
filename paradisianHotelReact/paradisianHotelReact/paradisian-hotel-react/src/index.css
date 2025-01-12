@@ -916,6 +916,19 @@ h2 {
   height: 100vh;
 }
 
+.small-spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #666;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.total-price {
+  overflow: hidden;
+}
+
 .go-back-button {
   background-color: #666;
   color: white;
