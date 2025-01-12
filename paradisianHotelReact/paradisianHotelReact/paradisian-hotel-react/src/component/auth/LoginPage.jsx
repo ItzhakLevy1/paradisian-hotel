@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom"; // React Router hooks for navigation and location
 import ApiService from "../../service/ApiService"; // API service for server communication
+import Spinner from "react-bootstrap/Spinner"; // Import Spinner from react-bootstrap
 
 function LoginPage() {
   // State variables to store form inputs and errors
   const [email, setEmail] = useState(""); // User's email address
   const [password, setPassword] = useState(""); // User's password
   const [error, setError] = useState(""); // Error message for login issues
+  const [loading, setLoading] = useState(false); // Loading state for spinner
 
   // React Router hooks for navigation and access to the current location
   const navigate = useNavigate(); // To programmatically navigate to other routes
@@ -26,6 +28,8 @@ function LoginPage() {
       return;
     }
 
+    setLoading(true); // Set loading state to true before making the request
+
     try {
       // Call the API to log in the user
       const response = await ApiService.loginUser({ email, password });
@@ -40,6 +44,8 @@ function LoginPage() {
       // Handle any errors from the login request
       setError(error.response?.data?.message || error.message); // Show the server's error message or a generic one
       setTimeout(() => setError(""), 5000); // Clear the error after 5 seconds
+    } finally {
+      setLoading(false); // Set loading state to false after the request is complete
     }
   };
 
@@ -50,29 +56,35 @@ function LoginPage() {
       {/* Display error messages, if any */}
       {error && <p className="error-message">{error}</p>}
 
-      {/* Login form */}
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Email: </label>
-          <input
-            type="email" // Input type is email for validation
-            value={email} // Binds input value to the email state
-            onChange={(e) => setEmail(e.target.value)} // Updates state when the user types
-            required // Ensures the field is required
-          />
-        </div>
-        <div className="form-group">
-          <label>Password: </label>
-          <input
-            type="password" // Input type is password for masking characters
-            value={password} // Binds input value to the password state
-            onChange={(e) => setPassword(e.target.value)} // Updates state when the user types
-            required // Ensures the field is required
-          />
-        </div>
-        <button type="submit">Login</button>{" "}
-        {/* Triggers the handleSubmit function */}
-      </form>
+      {/* Conditionally render the spinner or the login form */}
+      {loading ? (
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>Email: </label>
+            <input
+              type="email" // Input type is email for validation
+              value={email} // Binds input value to the email state
+              onChange={(e) => setEmail(e.target.value)} // Updates state when the user types
+              required // Ensures the field is required
+            />
+          </div>
+          <div className="form-group">
+            <label>Password: </label>
+            <input
+              type="password" // Input type is password for masking characters
+              value={password} // Binds input value to the password state
+              onChange={(e) => setPassword(e.target.value)} // Updates state when the user types
+              required // Ensures the field is required
+            />
+          </div>
+          <button type="submit">Login</button>{" "}
+          {/* Triggers the handleSubmit function */}
+        </form>
+      )}
 
       {/* Link to the registration page for users without an account */}
       <p className="register-link">
