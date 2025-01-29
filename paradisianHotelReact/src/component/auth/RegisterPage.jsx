@@ -75,7 +75,7 @@ function RegisterPage() {
                 // Redirect to the login page after 3 seconds
                 setTimeout(() => {
                     setSuccessMessage('');
-                    navigate('/'); // Navigate to the home or login page
+                    navigate('/login'); // Navigate to the login page
                 }, 3000);
             }
         } catch (error) {
