@@ -996,3 +996,101 @@ h2 {
   color: #666;
   box-shadow: 0 0 10px #666;
 }
+
+/* Mobile size screen */
+@media (max-width: 768px) {
+  /* .navbar {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .navbar-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  } */
+
+  /* .auth-container {
+    width: 90%;
+    margin: 20px auto;
+  } */
+
+  .find-booking-page {
+    max-width: 100%;
+    margin: 10px auto 60px auto;
+    padding: 20px;
+  }
+
+  .search-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .search-field {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .home-search-button {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .service-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .service-card {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .room-list-item {
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .room-list-item-image {
+    width: 100%;
+    height: auto;
+  }
+
+  /* .room-details {
+    width: 100%;
+    margin: 10px 0;
+  } */
+
+  /* .view-rooms-home {
+    text-align: center;
+    margin: 20px 0;
+  } */
+
+  .home-services {
+    display: flex;
+  }
+
+  .paradisian-color {
+    font-size: 1em;
+    color: white;
+    -webkit-text-stroke: white;
+    backdrop-filter: blur(0px);
+    background-color: rgba(0, 0, 0, 0);
+    box-shadow: none;
+  }
+
+  .header-banner h1 {
+    font-size: 2em;
+  }
+
+  .header-banner h3 {
+    font-size: 1.5em;
+  }
+
+  /* All rooms page */
+  .all-room-filter-div {
+    display: contents;
+  }
+}
