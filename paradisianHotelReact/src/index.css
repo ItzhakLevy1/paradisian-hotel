@@ -999,21 +999,6 @@ h2 {
 
 /* Mobile size screen */
 @media (max-width: 768px) {
-  /* .navbar {
-    flex-direction: column;
-    padding: 15px;
-  }
-
-  .navbar-nav {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  } */
-
-  /* .auth-container {
-    width: 90%;
-    margin: 20px auto;
-  } */
 
   .find-booking-page {
     max-width: 100%;
@@ -1057,16 +1042,6 @@ h2 {
     width: 100%;
     height: auto;
   }
-
-  /* .room-details {
-    width: 100%;
-    margin: 10px 0;
-  } */
-
-  /* .view-rooms-home {
-    text-align: center;
-    margin: 20px 0;
-  } */
 
   .home-services {
     display: flex;
