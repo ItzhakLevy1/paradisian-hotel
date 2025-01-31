@@ -254,6 +254,7 @@ p {
   margin: 10px;
   padding: 15px;
   background-color: rgba(0, 0, 0, 0.541);
+  border-radius: 10px;
 }
 
 .search-field label {
@@ -390,6 +391,7 @@ p {
   margin-bottom: 5em;
   backdrop-filter: blur(15px);
   background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
 }
 
 .service-card {
@@ -999,7 +1001,6 @@ h2 {
 
 /* Mobile size screen */
 @media (max-width: 768px) {
-
   .find-booking-page {
     max-width: 100%;
     margin: 10px auto 60px auto;
