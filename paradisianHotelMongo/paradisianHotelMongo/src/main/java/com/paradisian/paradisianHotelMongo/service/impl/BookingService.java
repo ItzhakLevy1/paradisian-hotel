@@ -4,6 +4,7 @@ import com.paradisian.paradisianHotelMongo.dto.*;
 import com.paradisian.paradisianHotelMongo.entity.*;
 import com.paradisian.paradisianHotelMongo.exception.OurException;
 import com.paradisian.paradisianHotelMongo.repo.*;
+import com.paradisian.paradisianHotelMongo.service.interfac.EmailService;
 import com.paradisian.paradisianHotelMongo.service.interfac.IBookingService;
 import com.paradisian.paradisianHotelMongo.service.interfac.IRoomService;
 import com.paradisian.paradisianHotelMongo.utils.Utils;
@@ -24,6 +25,8 @@ public class BookingService implements IBookingService {
     private RoomRepository roomRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private EmailService emailService;
 
     @Override
     public Response saveBooking(String rooId, String userId, Booking bookingRequest) {
@@ -57,6 +60,24 @@ public class BookingService implements IBookingService {
             roomBookings.add(savedBooking);
             room.setBookings(roomBookings);
             roomRepository.save(room);
+
+            // Send confirmation email
+
+            String subject = "Booking Confirmation - Paradisian Hotel";
+
+            String body = "Dear " + user.getName() + ",\n\n" +
+                    "Your booking has been confirmed. Here are the details:\n" +
+                    "Booking Confirmation Code: " + bookingConfirmationCode + "\n" +
+                    "Room Type: " + room.getRoomType() + "\n" +
+                    "Check-In Date: " + bookingRequest.getCheckInDate() + "\n" +
+                    "Check-Out Date: " + bookingRequest.getCheckOutDate() + "\n" +
+                    "Number of Adults: " + bookingRequest.getNumOfAdults() + "\n" +
+                    "Number of Children: " + bookingRequest.getNumOfChildren() + "\n\n" +
+                    "Thank you for choosing our hotel.\n\n" +
+                    "Best regards,\n" +
+                    "Paradisian Hotel";
+
+            emailService.sendEmail(user.getEmail(), subject, body);
 
             response.setStatusCode(200);
             response.setMessage("successful");
