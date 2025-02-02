@@ -4,6 +4,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import ApiService from "../../service/ApiService";
 import toastr from "toastr";
 import "toastr/build/toastr.min.css";
+// import Spinner from "./Spinner"; // Correct import path for Spinner component
+import "../../index.css";
 
 const RoomSearch = ({ handleSearchResult }) => {
   const [startDate, setStartDate] = useState(null);
@@ -11,6 +13,7 @@ const RoomSearch = ({ handleSearchResult }) => {
   const [roomType, setRoomType] = useState("");
   const [roomTypes, setRoomTypes] = useState([]);
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Track loading state
 
   useEffect(() => {
     const fetchRoomTypes = async () => {
@@ -34,13 +37,14 @@ const RoomSearch = ({ handleSearchResult }) => {
     }, timeout);
   };
 
-  /**THis is going to be used to fetch avaailabe rooms from database base on seach data that'll be passed in */
+  /* Fetch availabe rooms from the database base on search data that will be passed in */
   const handleInternalSearch = async () => {
     if (!startDate || !endDate || !roomType) {
       toastr.error("Please select all fields");
       return false;
     }
     try {
+      setIsLoading(true);
       // Convert startDate to the desired format
       const formattedStartDate = startDate
         ? startDate.toISOString().split("T")[0]
@@ -61,6 +65,7 @@ const RoomSearch = ({ handleSearchResult }) => {
           toastr.error(
             "Room not currently available for this date range on the selected room type."
           );
+          setIsLoading(false);
           return;
         }
         handleSearchResult(response.roomList);
@@ -68,8 +73,18 @@ const RoomSearch = ({ handleSearchResult }) => {
       }
     } catch (error) {
       toastr.error("Unknown error occurred: " + error.response.data.message);
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="d-flex justify-content-center align-items-center spinner-container">
+        <div className="large-spinner"></div>
+      </div>
+    );
+  }
 
   return (
     <section>
