@@ -10,39 +10,45 @@ const RoomResult = ({ roomSearchResults }) => { // Collecting the props value = 
     <section className="room-results">
       {roomSearchResults && roomSearchResults.length > 0 && (  // Check if there are any search results 
         <div className="room-list">
-          {roomSearchResults.map((room) => ( // Map over the search results to render each room 
-            <div key={room.id} className="room-list-item">
-              <img
-                className="room-list-item-image"
-                src={room.roomPhotoUrl}
-                alt={room.roomType}
-                loading="lazy"
-              />
-              <div className="room-details">  {/* Display room details */}
-                <h3>{room.roomType}</h3>
-                <p>Price: ${room.roomPrice} / night</p>
-                <p>Description: {room.roomDescription}</p>
-              </div>
+          {roomSearchResults.map((room) => { // Map over the search results to render each room 
+            console.log("Room ID:", room.id); // Log the room.id
+            return (
+              <div key={room.id} className="room-list-item">
+                <img
+                  className="room-list-item-image"
+                  src={room.roomPhotoUrl}
+                  alt={room.roomType}
+                  loading="lazy"
+                />
+                <div className="room-details">  {/* Display room details */}
+                  <h3>{room.roomType}</h3>
+                  <p>Price: ${room.roomPrice} / night</p>
+                  <p>Description: {room.roomDescription}</p>
+                </div>
 
-              <div className="book-now-div">
-                {isAdmin ? (   // Conditionally render buttons based on user role 
-                  <button
-                    className="edit-room-button"
-                    onClick={() => navigate(`/admin/edit-room/${room.id}`)} // Navigate to edit room with room ID
-                  >
-                    Edit Room
-                  </button>
-                ) : (
-                  <button
-                    className="book-now-button"
-                    onClick={() => navigate(`/room-details-book/${room.id}`)} // Navigate to book a room with a room ID
-                  >
-                    View/Book Now
-                  </button>
-                )}
+                <div className="book-now-div">
+                  {isAdmin ? (   // Conditionally render buttons based on user role 
+                    <button
+                      className="edit-room-button"
+                      onClick={() => {
+                        console.log("Room ID:", room.id); // Log the room.id on button click
+                        navigate(`/admin/edit-room/${room.id}`); // Navigate to edit room with room ID
+                      }}
+                    >
+                      Edit Room
+                    </button>
+                  ) : (
+                    <button
+                      className="book-now-button"
+                      onClick={() => navigate(`/room-details-book/${room.id}`)} // Navigate to book a room with a room ID
+                    >
+                      View/Book Now
+                    </button>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </section>
