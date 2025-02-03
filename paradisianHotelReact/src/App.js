@@ -17,6 +17,7 @@ import LoginPage from "./component/auth/LoginPage";
 import RegisterPage from "./component/auth/RegisterPage";
 import ProfilePage from "./component/profile/ProfilePage";
 import EditRoomPage from "./component/admin/EditRoomPage";
+import AdminPage from "./component/admin/AdminPage"; // Import AdminPage
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import toastr from "toastr";
@@ -59,6 +60,7 @@ function AppContent() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/admin/edit-room/:roomId" element={<EditRoomPage />} />
+          <Route path="/admin" element={<AdminPage />} />
           <Route path="*" element={<Navigate to="/home" />} /> {/* Default route so that on first load the user sees the home page*/}
         </Routes>
       </div>
