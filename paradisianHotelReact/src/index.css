@@ -437,6 +437,7 @@ p {
 }
 
 .all-rooms h2 {
+  margin-left: 4em;
   text-align: center;
   margin-bottom: 20px;
   color: #007f86;
@@ -457,7 +458,9 @@ p {
 
 .filter-select-div {
   width: 100%;
-  margin: 0px 0px 0px 4rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
 .add-room-button {
@@ -1068,5 +1071,11 @@ h2 {
   /* All rooms page */
   .all-room-filter-div {
     display: contents;
+  }
+
+  /* admin/manage-rooms page */
+
+  .all-room-filter-div {
+    width: 100%;
   }
 }
