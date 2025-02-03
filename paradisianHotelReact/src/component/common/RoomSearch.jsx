@@ -4,7 +4,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import ApiService from "../../service/ApiService";
 import toastr from "toastr";
 import "toastr/build/toastr.min.css";
-// import Spinner from "./Spinner"; // Correct import path for Spinner component
 import "../../index.css";
 
 const RoomSearch = ({ handleSearchResult }) => {
@@ -13,7 +12,7 @@ const RoomSearch = ({ handleSearchResult }) => {
   const [roomType, setRoomType] = useState("");
   const [roomTypes, setRoomTypes] = useState([]);
   const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false); // Track loading state
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchRoomTypes = async () => {

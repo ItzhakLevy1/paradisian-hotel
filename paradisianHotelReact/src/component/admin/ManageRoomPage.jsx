@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import ApiService from "../../service/ApiService";
 import Pagination from "../common/Pagination";
 import RoomResult from "../common/RoomResult";
+import "../../index.css";
 
 const ManageRoomPage = () => {
   const [rooms, setRooms] = useState([]);
@@ -12,6 +13,7 @@ const ManageRoomPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [roomsPerPage] = useState(5);
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchRooms = async () => {
@@ -22,6 +24,8 @@ const ManageRoomPage = () => {
         setFilteredRooms(allRooms);
       } catch (error) {
         console.error("Error fetching rooms:", error.message);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -60,6 +64,14 @@ const ManageRoomPage = () => {
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  if (isLoading) {
+    return (
+      <div className="d-flex justify-content-center align-items-center spinner-container">
+        <div className="large-spinner"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="all-rooms">
