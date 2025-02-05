@@ -24,7 +24,7 @@ public class AwsS3Service {
 
     // Inject AWS secret key from the application.properties or environment variables
     @Value("${aws.s3.secret.key}")
-    private String getAwsS3SecretKey;
+    private String awsS3SecretKey;
 
     /**
      * This method saves an image file to AWS S3 and returns the public URL of the uploaded image.
@@ -39,7 +39,7 @@ public class AwsS3Service {
             String s3FileName = photo.getOriginalFilename();
 
             // Create AWS credentials using the access and secret keys
-            BasicAWSCredentials awsCredentials = new BasicAWSCredentials(awsS3AccessKey, getAwsS3SecretKey);
+            BasicAWSCredentials awsCredentials = new BasicAWSCredentials(awsS3AccessKey, awsS3SecretKey);
 
             // Build an S3 client with the provided credentials and region (e.g., US East 1)
             AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
