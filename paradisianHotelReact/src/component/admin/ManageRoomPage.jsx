@@ -20,8 +20,9 @@ const ManageRoomPage = () => {
       try {
         const response = await ApiService.getAllRooms();
         const allRooms = response.roomList;
-        setRooms(allRooms);
-        setFilteredRooms(allRooms);
+        const sortedRooms = sortRoomsByPrice(allRooms); // Sort rooms by price
+        setRooms(sortedRooms);
+        setFilteredRooms(sortedRooms);
       } catch (error) {
         console.error("Error fetching rooms:", error.message);
       } finally {
@@ -41,6 +42,10 @@ const ManageRoomPage = () => {
     fetchRooms();
     fetchRoomTypes();
   }, []);
+
+  const sortRoomsByPrice = (rooms) => {
+    return rooms.sort((a, b) => b.roomPrice - a.roomPrice); // Sort rooms by price from high to low
+  };
 
   const handleRoomTypeChange = (e) => {
     setSelectedRoomType(e.target.value);
