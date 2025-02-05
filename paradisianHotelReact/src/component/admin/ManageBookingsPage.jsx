@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ApiService from "../../service/ApiService";
 import Pagination from "../common/Pagination";
+import "../../index.css";
 
 const ManageBookingsPage = () => {
   const [bookings, setBookings] = useState([]);
   const [filteredBookings, setFilteredBookings] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [bookingsPerPage] = useState(6);
+  const [bookingsPerPage] = useState(5);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,15 +22,18 @@ const ManageBookingsPage = () => {
         setFilteredBookings(allBookings);
       } catch (error) {
         console.error("Error fetching bookings:", error.message);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchBookings();
   }, []);
 
-  useEffect(() => {
-    filterBookings(searchTerm);
-  }, [searchTerm, bookings]);
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+    filterBookings(e.target.value);
+  };
 
   const filterBookings = (term) => {
     if (term === "") {
@@ -46,10 +51,6 @@ const ManageBookingsPage = () => {
     setCurrentPage(1);
   };
 
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
   const indexOfLastBooking = currentPage * bookingsPerPage;
   const indexOfFirstBooking = indexOfLastBooking - bookingsPerPage;
   const currentBookings = filteredBookings.slice(
@@ -58,6 +59,14 @@ const ManageBookingsPage = () => {
   );
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  if (isLoading) {
+    return (
+      <div className="d-flex justify-content-center align-items-center spinner-container">
+        <div className="large-spinner"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="bookings-container">
