@@ -16,7 +16,7 @@ import java.io.InputStream; // For handling file streams
 @Service // Indicates that this class is a service component managed by Spring
 public class AwsS3Service {
 
-    private final String bucketName = "paradisian-hotel"; // S3 bucket name where images will be stored
+    private final String bucketName = "paradisian-hotel-mongo"; // S3 bucket name where images will be stored
 
     // Inject AWS access key from the application.properties or environment variables
     @Value("${aws.s3.access.key}")
@@ -44,7 +44,7 @@ public class AwsS3Service {
             // Build an S3 client with the provided credentials and region (e.g., US East 1)
             AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
                     .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
-                    .withRegion(Regions.US_EAST_1) // Set the AWS region (e.g., "us-east-1")
+                    .withRegion(Regions.EU_NORTH_1) // Set the AWS region (e.g., "us-east-1")
                     .build();
 
             // Get the input stream of the file to upload
