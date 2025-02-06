@@ -24,8 +24,8 @@ const EditBookingPage = () => {
     fetchBookingDetails();
   }, [bookingCode]);
 
-  const acheiveBooking = async (bookingId) => {
-    if (!window.confirm("Are you sure you want to Acheive this booking?")) {
+  const cancelBooking = async (bookingId) => {
+    if (!window.confirm("Are you sure you want to cancel this booking?")) {
       return; // Do nothing if the user cancels
     }
 
@@ -47,7 +47,7 @@ const EditBookingPage = () => {
 
   return (
     <div className="find-booking-page">
-      <h2>Booking Detail</h2>
+      {/* <h2>Booking Detail</h2> */}
       {error && <p className="error-message">{error}</p>}
       {success && <p className="success-message">{success}</p>}
       {bookingDetails && (
@@ -58,8 +58,8 @@ const EditBookingPage = () => {
           <p>Check-out Date: {bookingDetails.checkOutDate}</p>
           <p>Num Of Adults: {bookingDetails.numOfAdults}</p>
           <p>Num Of Children: {bookingDetails.numOfChildren}</p>
-          <p>Guest Email: {bookingDetails.user.email}</p> {/* Correctly access guest email */}
-
+          <p>Guest Email: {bookingDetails.user.email}</p>{" "}
+          {/* Correctly access guest email */}
           <br />
           <hr />
           <br />
@@ -69,7 +69,6 @@ const EditBookingPage = () => {
             <p> Email: {bookingDetails.user.email}</p>
             <p> Phone Number: {bookingDetails.user.phoneNumber}</p>
           </div>
-
           <br />
           <hr />
           <br />
@@ -86,10 +85,10 @@ const EditBookingPage = () => {
             />
           </div>
           <button
-            className="acheive-booking"
-            onClick={() => acheiveBooking(bookingDetails.id)}
+            className="cancel-booking"
+            onClick={() => cancelBooking(bookingDetails.id)}
           >
-            Acheive Booking
+            Cancel Booking
           </button>
         </div>
       )}

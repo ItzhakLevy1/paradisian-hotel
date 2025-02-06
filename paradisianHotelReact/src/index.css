@@ -835,7 +835,7 @@ p {
   opacity: 0.8;
 }
 
-/*B0oking & manage booking styling*/
+/*Booking & manage booking styling*/
 
 /* General Styling */
 .bookings-container {
@@ -1000,6 +1000,25 @@ h2 {
   border: 1px solid #666;
   color: #666;
   box-shadow: 0 0 10px #666;
+}
+
+/* admin/edit-booking page */
+
+.cancel-booking {
+  background-color: #ffffff;
+  color: #dc3545;
+  padding: 10px 20px;
+  border: solid 1px #dc3545;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+  margin: inherit;
+  transition: background-color 0.3s, border 0.3s, color 0.3s ease;
+}
+
+.cancel-booking:hover {
+  color: white;
+  background-color: #dc3545;
 }
 
 /* Mobile size screen */
