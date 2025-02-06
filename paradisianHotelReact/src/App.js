@@ -67,7 +67,7 @@ function AppContent() {
           <Route path="/admin/manage-rooms" element={<ManageRoomPage />} />
           <Route path="/admin/manage-bookings" element={<ManageBookingsPage />} />
           <Route path="/admin/add-room" element={<AddRoomPage />} />
-          <Route path="*" element={<Navigate to="/home" />} /> {/* Default route so that on first load the user sees the home page*/}
+          <Route path="*" element={<Navigate to="/home" />} /> {/* Default route so that on first load the user will see the home page*/}
         </Routes>
       </div>
       <FooterComponent />

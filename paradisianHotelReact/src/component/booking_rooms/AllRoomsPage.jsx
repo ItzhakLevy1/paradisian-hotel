@@ -14,7 +14,7 @@ const AllRoomsPage = () => {
   const [selectedRoomType, setSelectedRoomType] = useState(""); // Tracks the currently selected room type for filtering
   const [currentPage, setCurrentPage] = useState(1); // Tracks the current page for pagination
   const [roomsPerPage] = useState(5); // Number of rooms to display per page (fixed at 5)
-  const [sortOrder, setSortOrder] = useState("asc"); // Tracks the sorting order (ascending or descending)
+  const [sortOrder, setSortOrder] = useState("desc"); // Tracks the sorting order (ascending or descending)
   const [isLoading, setIsLoading] = useState(true); // State to track loading status
   const [error, setError] = useState(null);
 
