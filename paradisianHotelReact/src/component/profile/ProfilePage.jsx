@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; // React Router hook for navigation
 import ApiService from '../../service/ApiService'; // Service to handle API requests
+import '../../../src/index.css';
 
 const ProfilePage = () => {
     // State to store user data (profile details and booking history)
@@ -9,12 +10,15 @@ const ProfilePage = () => {
     // State to store error messages
     const [error, setError] = useState(null);
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const navigate = useNavigate(); // Hook to programmatically navigate between routes
 
     // Fetch user profile and booking history when the component mounts
     useEffect(() => {
         const fetchUserProfile = async () => {
             try {
+                setIsLoading(true);
                 // Fetch the user's basic profile details
                 const response = await ApiService.getUserProfile();
 
@@ -26,6 +30,8 @@ const ProfilePage = () => {
             } catch (error) {
                 // Handle errors and display appropriate messages
                 setError(error.response?.data?.message || error.message);
+            } finally {
+                setIsLoading(false);
             }
         };
 
@@ -44,6 +50,13 @@ const ProfilePage = () => {
         navigate('/edit-profile'); // Redirect to the profile editing page
     };
 
+    if (isLoading) {
+        return (
+          <div className="d-flex justify-content-center align-items-center spinner-container">
+            <div className="large-spinner"></div>
+          </div>
+        );
+      }
     return (
         <div className="profile-page">
             {/* Display a welcome message if user data is available */}
