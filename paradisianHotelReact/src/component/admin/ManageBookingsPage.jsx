@@ -99,9 +99,7 @@ const ManageBookingsPage = () => {
             <button
               className="edit-room-button"
               onClick={() =>
-                navigate(
-                  `/admin/edit-booking/${booking.bookingConfirmationCode}`
-                )
+                navigate(`/admin/edit-booking/${booking.bookingConfirmationCode}`)
               }
             >
               Manage Booking

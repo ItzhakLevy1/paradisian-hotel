@@ -21,6 +21,7 @@ import AdminPage from "./component/admin/AdminPage";
 import ManageRoomPage from "./component/admin/ManageRoomPage";
 import ManageBookingsPage from "./component/admin/ManageBookingsPage";
 import AddRoomPage from "./component/admin/AddRoomPage";
+import EditBookingPage from "./component/admin/EditBookingPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import toastr from "toastr";
@@ -67,6 +68,7 @@ function AppContent() {
           <Route path="/admin/manage-rooms" element={<ManageRoomPage />} />
           <Route path="/admin/manage-bookings" element={<ManageBookingsPage />} />
           <Route path="/admin/add-room" element={<AddRoomPage />} />
+          <Route path="/admin/edit-booking/:bookingCode" element={<EditBookingPage />} /> {/* Add route for EditBookingPage */}
           <Route path="*" element={<Navigate to="/home" />} /> {/* Default route so that on first load the user will see the home page*/}
         </Routes>
       </div>

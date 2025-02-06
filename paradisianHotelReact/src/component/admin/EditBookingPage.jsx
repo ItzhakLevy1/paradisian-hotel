@@ -32,7 +32,7 @@ const EditBookingPage = () => {
     try {
       const response = await ApiService.cancelBooking(bookingId);
       if (response.statusCode === 200) {
-        setSuccessMessage("The boking was Successfully Acheived");
+        setSuccessMessage("The booking was Successfully Acheived");
 
         setTimeout(() => {
           setSuccessMessage("");
@@ -58,12 +58,12 @@ const EditBookingPage = () => {
           <p>Check-out Date: {bookingDetails.checkOutDate}</p>
           <p>Num Of Adults: {bookingDetails.numOfAdults}</p>
           <p>Num Of Children: {bookingDetails.numOfChildren}</p>
-          <p>Guest Email: {bookingDetails.guestEmail}</p>
+          <p>Guest Email: {bookingDetails.user.email}</p> {/* Correctly access guest email */}
 
           <br />
           <hr />
           <br />
-          <h3>Booker Detials</h3>
+          <h3>Booker Details</h3>
           <div>
             <p> Name: {bookingDetails.user.name}</p>
             <p> Email: {bookingDetails.user.email}</p>
