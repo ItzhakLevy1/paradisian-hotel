@@ -36,10 +36,15 @@ const EditProfilePage = () => {
     try {
       // Call the API to delete the user's profile
       await ApiService.deleteUser(user.id);
-      navigate("/signup"); // Redirect the user to the signup page after deletion
+      ApiService.logout(); // Log the user out
+      navigate("/home"); // Redirect the user to the home page after deletion
     } catch (error) {
       // Handle any errors during the API call
-      setError(error.message);
+      if (error.response && error.response.status === 403) {
+        setError('Please contact admin to request profile deletion');
+      } else {
+        setError(error.message);
+      }
     }
   };
 

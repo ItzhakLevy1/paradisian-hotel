@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{userId}")
-    @PreAuthorize("hasAuthority('ADMIN')")                                                  // Only users with the 'ADMIN' authority can access this endpoint
+    @PreAuthorize("hasAuthority('ADMIN') or #userId == authentication.principal.id")                                                  // Only users with the 'ADMIN' authority can access this endpoint
     public ResponseEntity<Response> deleteUser(@PathVariable("userId") String userId) {     // Deletes a user by their unique ID ({userId})
         Response response = userService.deleteUser(userId);                                 // Returns a success message or an error if the deletion fails
         return ResponseEntity.status(response.getStatusCode()).body(response);
