@@ -22,6 +22,7 @@ import ManageRoomPage from "./component/admin/ManageRoomPage";
 import ManageBookingsPage from "./component/admin/ManageBookingsPage";
 import AddRoomPage from "./component/admin/AddRoomPage";
 import EditBookingPage from "./component/admin/EditBookingPage";
+import EditProfilePage from "./component/profile/EditProfilePage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import toastr from "toastr";
@@ -63,6 +64,7 @@ function AppContent() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/profile/edit" element={<EditProfilePage />} />
           <Route path="/admin/edit-room/:roomId" element={<EditRoomPage />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/admin/manage-rooms" element={<ManageRoomPage />} />

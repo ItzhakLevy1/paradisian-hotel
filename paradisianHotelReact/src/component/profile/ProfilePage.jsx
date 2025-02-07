@@ -47,7 +47,7 @@ const ProfilePage = () => {
 
     // Navigate to the profile editing page
     const handleEditProfile = () => {
-        navigate('/edit-profile'); // Redirect to the profile editing page
+        navigate('/profile/edit'); // Redirect to the profile editing page
     };
 
     if (isLoading) {
