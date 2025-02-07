@@ -987,6 +987,22 @@ h2 {
   box-shadow: 0 0 10px #007f86;
 }
 
+/* /profile/edit */
+.delete-profile-button {
+  margin: 2em;
+  padding: 0.5em 1em;
+  border: 1px solid #dc3545;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.delete-profile-button:hover {
+  border: 1px solid #dc3545;
+  color: #dc3545;
+  box-shadow: 0 0 10px #dc3545;
+}
+
 .logout-button {
   margin: 2em;
   padding: 0.5em 1em;
