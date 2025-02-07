@@ -467,6 +467,20 @@ p {
   float: right;
   margin-right: 70px;
   font-weight: 600;
+  background-color: #fff;
+  color: #007f86;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+  border: solid 1px #fff;
+  transition: all 0.3s ease;
+}
+.add-room-button:hover {
+  /* background-color: #007f86; */
+  border: solid 1px #007f86;
+  color: #007f86;
 }
 
 .all-room-filter-div label {
