@@ -19,7 +19,8 @@ const RoomSearch = ({ handleSearchResult }) => {
       try {
         const types = await ApiService.getRoomTypes();
         console.log("types from the RoomSearch.js : ", types);
-        setRoomTypes(types);
+        const sortedTypes = sortRoomTypes(types); // Sort room types in the specified order
+        setRoomTypes(sortedTypes);
       } catch (error) {
         console.error("Error fetching room types:", error.message);
         toastr.error("Error fetching room types: " + error.message);
@@ -27,6 +28,20 @@ const RoomSearch = ({ handleSearchResult }) => {
     };
     fetchRoomTypes();
   }, []);
+
+  const sortRoomTypes = (types) => {
+    const order = [
+      "Paradisian Royal",
+      "Presidential",
+      "King",
+      "Suite",
+      "Family",
+      "Updated",
+      "Standard",
+      "Single",
+    ];
+    return types.sort((a, b) => order.indexOf(a) - order.indexOf(b));
+  };
 
   /**This methods is going to be used to show errors */
   const showError = (message, timeout = 5000) => {
