@@ -17,7 +17,8 @@ const ManageBookingsPage = () => {
     const fetchBookings = async () => {
       try {
         const response = await ApiService.getAllBookings();
-        const allBookings = response.bookingList;
+        console.log("API Response:", response); // Debug: log the entire response object
+        const allBookings = response.bookingList; // Make sure this property exists
         setBookings(allBookings);
         setFilteredBookings(allBookings);
       } catch (error) {
@@ -26,9 +27,10 @@ const ManageBookingsPage = () => {
         setIsLoading(false);
       }
     };
-
+  
     fetchBookings();
   }, []);
+  
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);

@@ -58,25 +58,28 @@ const EditBookingPage = () => {
           <p>Check-out Date: {bookingDetails.checkOutDate}</p>
           <p>Num Of Adults: {bookingDetails.numOfAdults}</p>
           <p>Num Of Children: {bookingDetails.numOfChildren}</p>
-          <p>Guest Email: {bookingDetails.user.email}</p>{" "}
-          {/* Correctly access guest email */}
-          <br />
-          <hr />
-          <br />
-          <h3>Booker Details</h3>
-          <div>
-            <p> Name: {bookingDetails.user.name}</p>
-            <p> Email: {bookingDetails.user.email}</p>
-            <p> Phone Number: {bookingDetails.user.phoneNumber}</p>
-          </div>
+          {bookingDetails.user && (
+            <>
+              <p>Guest Email: {bookingDetails.user.email}</p>
+              <br />
+              <hr />
+              <br />
+              <h3>Booker Details</h3>
+              <div>
+                <p>Name: {bookingDetails.user.name}</p>
+                <p>Email: {bookingDetails.user.email}</p>
+                <p>Phone Number: {bookingDetails.user.phoneNumber}</p>
+              </div>
+            </>
+          )}
           <br />
           <hr />
           <br />
           <h3>Room Details</h3>
           <div>
-            <p> Room Type: {bookingDetails.room.roomType}</p>
-            <p> Room Price: ${bookingDetails.room.roomPrice}</p>
-            <p> Room Description: {bookingDetails.room.roomDescription}</p>
+            <p>Room Type: {bookingDetails.room.roomType}</p>
+            <p>Room Price: ${bookingDetails.room.roomPrice}</p>
+            <p>Room Description: {bookingDetails.room.roomDescription}</p>
             <img
               src={bookingDetails.room.roomPhotoUrl}
               alt=""

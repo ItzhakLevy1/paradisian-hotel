@@ -80,7 +80,7 @@ public class Utils {
         return roomDTO;
     }
 
-    public static BookingDTO mapBookingEntityToBookingDTOPlusBookedRooms(Booking booking, boolean mapUser) {    // Converts a Booking entity to a BookingDTO, including the associated Room and optionally the User who made the booking
+    public static BookingDTO mapBookingEntityToBookingDTOPlusBookedRooms(Booking booking, boolean mapUser) {
         BookingDTO bookingDTO = new BookingDTO();
 
         bookingDTO.setId(booking.getId());
@@ -91,25 +91,30 @@ public class Utils {
         bookingDTO.setTotalNumOfGuest(booking.getTotalNumOfGuest());
         bookingDTO.setBookingConfirmationCode(booking.getBookingConfirmationCode());
 
-        if (mapUser) {  // If mapUser is true, the User associated with the booking is also converted into a UserDTO
-            bookingDTO.setUser(Utils.mapUserEntityToUserDTO(booking.getUser()));
+        if (mapUser) {
+            // Add a null check before mapping the user
+            if (booking.getUser() != null) {
+                bookingDTO.setUser(Utils.mapUserEntityToUserDTO(booking.getUser()));
+            } else {
+                System.out.println("Booking user is null.");
+            }
         }
 
         if (booking.getRoom() != null) {
-
             RoomDTO roomDTO = new RoomDTO();
-
             roomDTO.setId(booking.getRoom().getId());
             roomDTO.setRoomType(booking.getRoom().getRoomType());
             roomDTO.setRoomPrice(booking.getRoom().getRoomPrice());
             roomDTO.setRoomPhotoUrl(booking.getRoom().getRoomPhotoUrl());
             roomDTO.setRoomDescription(booking.getRoom().getRoomDescription());
-
             bookingDTO.setRoom(roomDTO);
+        } else {
+            System.out.println("Booking room is null.");
         }
 
         return bookingDTO;
     }
+
 
     public static UserDTO mapUserEntityToUserDTOPlusUserBookingsAndRoom(User user) {    // Converts a User entity to a UserDTO, including all the bookings made by that user, and for each booking, the associated room
         UserDTO userDTO = new UserDTO();

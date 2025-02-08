@@ -199,15 +199,15 @@ export default class ApiService {
     return response.data;
   }
 
-  /* This  gets alll bokings from the database */
-  static async getAllBookings() {
-    const result = await axios.get(`${this.BASE_URL}/bookings/all`, {
-      headers: this.getHeader(),
-    });
-    return result.data;
-  }
+  /* This gets all bookings from the database */
+static async getAllBookings() {
+  const result = await axios.get(`${this.BASE_URL}/admin/manage-bookings`, {
+    headers: this.getHeader(),
+  });
+  return result.data;
+}
 
-  /* This  get booking by the confirmation code */
+  /* This gets a booking by the confirmation code */
   static async getBookingByConfirmationCode(bookingCode) {
     const result = await axios.get(
       `${this.BASE_URL}/bookings/get-by-confirmation-code/${bookingCode}`
@@ -215,7 +215,7 @@ export default class ApiService {
     return result.data;
   }
 
-  /* This is the  to cancel user booking */
+  /* This is the to cancel user booking */
   static async cancelBooking(bookingId) {
     const result = await axios.delete(
       `${this.BASE_URL}/bookings/cancel/${bookingId}`,

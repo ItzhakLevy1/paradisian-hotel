@@ -23,6 +23,7 @@ import ManageBookingsPage from "./component/admin/ManageBookingsPage";
 import AddRoomPage from "./component/admin/AddRoomPage";
 import EditBookingPage from "./component/admin/EditBookingPage";
 import EditProfilePage from "./component/profile/EditProfilePage";
+import { ProtectedRoute, AdminRoute } from './service/guard';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import toastr from "toastr";
@@ -56,21 +57,27 @@ function AppContent() {
       <Navbar />
       <div className="content">
         <Routes>
+           {/* Public Routes */}
           <Route exact path="/home" element={<HomePage />} />
-          <Route exact path="/rooms" element={<AllRoomsPage />} />
-          <Route path="/find-booking" element={<FindBookingPage/>}></Route>
-          <Route path="/room-details-book/:roomId" element={<RoomDetailsPage/>}></Route>
-          <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route exact path="/rooms" element={<AllRoomsPage />} />
+          <Route path="/find-booking" element={<FindBookingPage/>}></Route>
+
+          {/* Protected Routes */}
+          <Route path="/room-details-book/:roomId" element={<RoomDetailsPage/>}></Route>
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/profile/edit" element={<EditProfilePage />} />
-          <Route path="/admin/edit-room/:roomId" element={<EditRoomPage />} />
+          <Route path="/profile/edit" element={<ProtectedRoute element={<EditProfilePage />} />}/>
+
+          {/* Admin Routes */}
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/admin/manage-rooms" element={<ManageRoomPage />} />
-          <Route path="/admin/manage-bookings" element={<ManageBookingsPage />} />
+          <Route path="/admin/edit-room/:roomId" element={<EditRoomPage />} />
           <Route path="/admin/add-room" element={<AddRoomPage />} />
-          <Route path="/admin/edit-booking/:bookingCode" element={<EditBookingPage />} /> {/* Add route for EditBookingPage */}
+          <Route path="/admin/manage-bookings" element={<ManageBookingsPage />} />
+          <Route path="/admin/edit-booking/:bookingCode" element={<EditBookingPage />} />
+
+          {/* Fallback Route */}
           <Route path="*" element={<Navigate to="/home" />} /> {/* Default route so that on first load the user will see the home page*/}
         </Routes>
       </div>
