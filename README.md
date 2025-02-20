@@ -1,4 +1,4 @@
-# Paradisian Hotel Booking Management System
+# Paradisian Hotel - Booking Management System
 
 A full-stack hotel booking management system built with React, Spring Boot, MongoDB, and deployed on AWS. This project allows users to book rooms, view booking details, and manage room availability.
 
