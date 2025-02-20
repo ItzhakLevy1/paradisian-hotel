@@ -9,6 +9,15 @@ const EditProfilePage = () => {
   // State to store error messages
   const [error, setError] = useState(null);
 
+  // State to store the edited name
+  const [editedName, setEditedName] = useState("");
+
+  // State to store success messages
+  const [success, setSuccess] = useState(null);
+
+  // State to disable the save button while saving
+  const [isSaving, setIsSaving] = useState(false);
+
   const navigate = useNavigate(); // Hook to programmatically navigate between routes
 
   // Fetch user profile details when the component mounts
@@ -18,6 +27,7 @@ const EditProfilePage = () => {
         // Call API to fetch user profile
         const response = await ApiService.getUserProfile();
         setUser(response.user); // Store the user details in the state
+        setEditedName(response.user.name); // Initialize the edited name with the current name
       } catch (error) {
         // Handle any errors during the API call
         setError(error.message);
@@ -26,6 +36,40 @@ const EditProfilePage = () => {
 
     fetchUserProfile(); // Trigger the fetch function
   }, []); // Empty dependency array ensures this runs only once when the component is mounted
+
+  // Handle saving the edited name
+  const handleSaveName = async () => {
+    // Trim the input to avoid spaces being considered valid input
+    if (!editedName.trim()) {
+      setError("Name cannot be empty");
+      setSuccess(null);
+      return;
+    }
+
+    setIsSaving(true); // Disable the save button while saving
+
+    try {
+      // Call the API to update the user's name
+      const updatedUser = await ApiService.updateUserProfile({
+        ...user,
+        name: editedName.trim(),
+      });
+
+      setUser(updatedUser); // Update state with the updated user data
+      setError(null); // Clear previous errors
+      setSuccess("Profile updated successfully!"); // Set success message
+
+      // Redirect to the profile page after a short delay
+      setTimeout(() => {
+        navigate("/profile"); // Adjust the path as needed
+      }, 2000);
+    } catch (error) {
+      setError(error.message); // Handle API errors
+      setSuccess(null);
+    } finally {
+      setIsSaving(false); // Re-enable the save button
+    }
+  };
 
   // Handle deleting the user's profile
   const handleDeleteProfile = async () => {
@@ -41,7 +85,7 @@ const EditProfilePage = () => {
     } catch (error) {
       // Handle any errors during the API call
       if (error.response && error.response.status === 403) {
-        setError('Please contact admin to request profile deletion');
+        setError("Please contact admin to request profile deletion");
       } else {
         setError(error.message);
       }
@@ -55,12 +99,23 @@ const EditProfilePage = () => {
       {/* Display an error message if there is one */}
       {error && <p className="error-message">{error}</p>}
 
+      {/* Display a success message if there is one */}
+      {success && <p className="success-message">{success}</p>}
+
       {/* Display user details if the user data is available */}
       {user && (
         <div className="profile-details">
           {/* Display the user's name */}
           <p>
-            <strong>Name:</strong> {user.name}
+            <strong>Name: </strong>
+            <input
+              type="text"
+              value={editedName}
+              onChange={(e) => setEditedName(e.target.value)}
+            />
+            <button onClick={handleSaveName} disabled={isSaving}>
+              {isSaving ? "Saving..." : "Save"}
+            </button>
           </p>
 
           {/* Display the user's email */}

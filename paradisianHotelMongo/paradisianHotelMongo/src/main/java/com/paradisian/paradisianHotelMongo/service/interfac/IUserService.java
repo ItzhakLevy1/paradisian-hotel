@@ -7,6 +7,10 @@ import com.paradisian.paradisianHotelMongo.entity.User;
 
 public interface IUserService {
 
+    Response updateUserProfile(User updatedUser);
+
+    Response updateUserProfile(User updatedUser, String authenticatedUserEmail);
+
     boolean isEmailTaken(String email);
 
     Response register(User user);

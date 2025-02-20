@@ -3,14 +3,32 @@ import axios from "axios";
 export default class ApiService {
   static BASE_URL = "http://localhost:4040"; // Defines the base URL of the API server. All the HTTP requests will use this as the root of their paths
 
+  // Function to get the authorization header
   static getHeader() {
-    // This getHeader method is used in requests that require the user to be authenticated
-    const token = localStorage.getItem("token"); // Retrieves the token stored in the browser's localStorage
+    const token = localStorage.getItem("token");
+    console.log("Authorization token:", token);
     return {
-      // Returns an object representing the headers required for authenticated requests.
-      Authorization: `Bearer ${token}`, // The Authorization header contains a Bearer token, which will be sent with requests to authenticate the user
-      "Content-Type": "application/json", // The Content-Type is set to application/json, meaning the data being sent is expected to be in JSON format
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
     };
+  }
+
+  // Method to refresh the token
+  static async refreshToken() {
+    try {
+      console.log("Attempting to refresh token...");
+      const refreshToken = localStorage.getItem("refreshToken");
+      console.log("Refresh token:", refreshToken);
+      const response = await axios.post(`${this.BASE_URL}/auth/refresh-token`, {
+        token: refreshToken,
+      });
+      localStorage.setItem("token", response.data.token);
+      console.log("Token refreshed successfully");
+      return response.data.token;
+    } catch (error) {
+      console.error("Failed to refresh token:", error.message);
+      throw new Error("Failed to refresh token: " + error.message);
+    }
   }
 
   /******************* AUTH *******************/
@@ -95,6 +113,64 @@ export default class ApiService {
       }
     );
     return response.data; // It returns the data received from the API
+  }
+
+  // Function to update user profile
+  static async updateUserProfile(userData) {
+    try {
+      console.log("Attempting to update user profile with data:", userData);
+      const response = await axios.put(
+        `${this.BASE_URL}/users/update-profile`, // Updated endpoint
+        userData,
+        {
+          headers: this.getHeader(),
+        }
+      );
+      if (response.status === 200) {
+        console.log(
+          "User profile updated successfully:",
+          response.data.message
+        );
+        return response.data.user; // Return the updated user data
+      } else {
+        throw new Error("Failed to update profile: Unexpected response status");
+      }
+    } catch (error) {
+      console.error("Failed to update profile:", error.message);
+      if (error.response && error.response.status === 403) {
+        try {
+          console.log("Access forbidden, attempting to refresh token...");
+          await this.refreshToken();
+          const retryResponse = await axios.put(
+            `${this.BASE_URL}/users/update-profile`, // Updated endpoint
+            userData,
+            {
+              headers: this.getHeader(),
+            }
+          );
+          if (retryResponse.status === 200) {
+            console.log(
+              "User profile updated successfully after token refresh:",
+              retryResponse.data.message
+            );
+            return retryResponse.data.user; // Return the updated user data
+          } else {
+            throw new Error(
+              "Failed to update profile after token refresh: Unexpected response status"
+            );
+          }
+        } catch (retryError) {
+          console.error(
+            "Failed to update profile after token refresh:",
+            retryError.message
+          );
+          throw new Error(
+            "Failed to update profile: Access forbidden. Please check your permissions."
+          );
+        }
+      }
+      throw new Error("Failed to update profile: " + error.message);
+    }
   }
 
   /******************* ROOM *******************/
@@ -200,12 +276,12 @@ export default class ApiService {
   }
 
   /* This gets all bookings from the database */
-static async getAllBookings() {
-  const result = await axios.get(`${this.BASE_URL}/admin/manage-bookings`, {
-    headers: this.getHeader(),
-  });
-  return result.data;
-}
+  static async getAllBookings() {
+    const result = await axios.get(`${this.BASE_URL}/admin/manage-bookings`, {
+      headers: this.getHeader(),
+    });
+    return result.data;
+  }
 
   /* This gets a booking by the confirmation code */
   static async getBookingByConfirmationCode(bookingCode) {

@@ -2,6 +2,7 @@ package com.paradisian.paradisianHotelMongo.controllers;
 
 
 import com.paradisian.paradisianHotelMongo.dto.Response;
+import com.paradisian.paradisianHotelMongo.entity.User;
 import com.paradisian.paradisianHotelMongo.service.interfac.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,14 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired              // Injects the IUserService interface, which provides the methods required to interact with user-related data
     private IUserService userService;
+
+    @PutMapping("/update-profile")
+    @PreAuthorize("hasAuthority('USER')")
+    public ResponseEntity<Response> updateUserProfile(@RequestBody User updatedUser) {
+        String authenticatedUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        Response response = userService.updateUserProfile(updatedUser, authenticatedUserEmail);
+        return ResponseEntity.status(response.getStatusCode()).body(response);
+    }
 
     @GetMapping("/all")
     @PreAuthorize("hasAuthority('ADMIN')")

@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.paradisian.paradisianHotelMongo.service.interfac.*;
 
+import java.nio.file.AccessDeniedException;
 import java.util.List;
 
 /**
@@ -33,6 +34,49 @@ public class UserService implements IUserService {
     private JWTUtils jwtUtils;
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Override
+    public Response updateUserProfile(User updatedUser) {
+        return null;
+    }
+
+    @Override
+    public Response updateUserProfile(User updatedUser, String authenticatedUserEmail) {
+        Response response = new Response();
+        try {
+            // Fetch the user from the repository using the provided ID
+            User existingUser = userRepository.findById(updatedUser.getId())
+                    .orElseThrow(() -> new RuntimeException("User not found"));
+
+            // Ensure that the authenticated user is trying to update their own profile
+            if (!existingUser.getEmail().equals(authenticatedUserEmail)) {
+                throw new AccessDeniedException("You are not authorized to update this profile");
+            }
+
+            // Update the user details with the new values
+            existingUser.setName(updatedUser.getName());
+            // Update other fields if necessary (e.g., email, phone, etc.)
+
+            // Save the updated user back to the repository
+            User savedUser = userRepository.save(existingUser);
+
+            // Map the saved user to a DTO
+            UserDTO userDTO = Utils.mapUserEntityToUserDTO(savedUser);
+
+            response.setStatusCode(200);
+            response.setMessage("Profile updated successfully");
+            response.setUser(userDTO); // Include the updated user data in the response
+        } catch (AccessDeniedException e) {
+            // Handle access denial exception
+            response.setStatusCode(403);
+            response.setMessage(e.getMessage());
+        } catch (Exception e) {
+            // Handle other exceptions
+            response.setStatusCode(500);
+            response.setMessage("Error updating profile: " + e.getMessage());
+        }
+        return response;
+    }
 
     /**
      * Utility method to check if an email is already taken.
